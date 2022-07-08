@@ -16,7 +16,10 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-int ft_env(char **env);
-int ft_export(char **env, char *str);
+int		ft_env(char **env);
+int		ft_export(char **env, char *str);
+int		ft_pwd();
+int		ft_cd(char *str, char **env);
+int 	ft_echo(char *str, int flag);
 
 #endif

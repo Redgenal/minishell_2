@@ -10,7 +10,7 @@ NAME 	= minishell
 
 LIB		= libft/libft.a
 
-FLAGS 	= -Werror -Wextra -Wall -I $(HEADER) -fsanitize=address
+FLAGS 	= -Werror -Wextra -Wall -I $(HEADER) -fsanitize=address -g
 
 .PHONY	: all clean fclean re
 

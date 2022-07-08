@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char **ft_pind_path(char **envp)
+char	**ft_pind_path(char **envp)
 {
 	char	**arr;
 	int		i;
