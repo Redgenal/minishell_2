@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/05 20:56:28 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/08 18:50:05 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char	*d_quote(char *str, int *i)
 	j = *i;
 	while (str[(*i)++])
 	{
-		if (str[*i] == '\\' && (str[(*i + 1)] == '\"' || str[(*i + 1)] == '$' || str[(*i + 1)] == '\\'))
+		if (str[*i] == '\\' && (str[(*i + 1)] == '\"' \
+			|| str[(*i + 1)] == '$' || str[(*i + 1)] == '\\'))
 			str = ft_slesh(str, i);
 		if (str[*i] == '\"')
 			break ;
@@ -86,7 +87,7 @@ int	ft_parser(char *str)
 			str = d_quote(str, &i);
 		i++;
 	}
-		printf("%s\n", str);
+	printf("%s\n", str);
 	return (0);
 }
 

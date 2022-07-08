@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/05 23:52:45 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/08 23:40:15 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	sig_int(int sig)
 int	minishell(void)
 {
 	char	*str;
+	int		pre;
 
 	while (1)
 	{
+		pre = 0;
 		str = readline(PROMPT);
 		if (str && str[0] != '\0')
 			add_history(str);
@@ -35,8 +37,12 @@ int	minishell(void)
 			printf("\033[A%sexit\n", PROMPT);
 			return (0);
 		}
+		pre = ft_prepars(str);
+		if (pre == 1)
+			continue ;
 		free (str);
 	}
+	free (str);
 	return (0);
 }
 
