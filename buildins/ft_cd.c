@@ -30,16 +30,12 @@ int	ft_cd(char *str, char **env)
 		if (ft_strncmp(env[i], "PWD=", 4) == 0)
 		{
 			free(env[i]);
-			printf("\nnew_pwd = %s\n\n", new_pwd);
 			env[i] = ft_strjoin("PWD=", new_pwd);
-			printf("\n%s\n\n", env[i]);
 		}
 		else if (ft_strncmp(env[i], "OLDPWD=", 7) == 0)
 		{
 			free(env[i]);
-			printf("\nnew_opwd = %s\n\n", new_pwd);
 			env[i] = ft_strjoin("OLDPWD=", new_opwd);
-			printf("\n%s\n\n", env[i]);
 		}
 	}
 	free(new_opwd);
