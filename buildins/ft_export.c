@@ -36,7 +36,9 @@ int	ft_no_arg(t_list *env)
 int	ft_export(t_list **env, char *str)
 {
 	t_list	*new;
+	t_list	*first;
 
+	first = *env;
 	if (!str)
 		ft_no_arg(*env);
 	else
@@ -47,5 +49,6 @@ int	ft_export(t_list **env, char *str)
 		new = ft_lstnew(NULL);
 		ft_lstadd_back(env, new);
 	}
+	*env = first;
 	return (0);
 }
