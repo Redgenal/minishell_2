@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int ft_echo(char *str, int flag)
+int	ft_echo(char *str, int flag)
 {
 	if (flag == 1)
 		printf("%s", str);

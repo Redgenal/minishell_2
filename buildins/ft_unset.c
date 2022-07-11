@@ -12,29 +12,33 @@
 
 #include "../minishell.h"
 
-void	ft_remove(char **env, int n)
+void	ft_remove(t_list **env)
 {
-	while (env[n])
-	{
-		env[n] = env[n + 1];
-		n++;
-	}
+	t_list	*clear;
+
+	clear = (*env)->next;
+	(*env)->next = (*env)->next->next;
+	free(clear);
 }
 
-int ft_unset(char *str, char **env)
+int	ft_unset(char *str, t_list **env)
 {
-	int	i;
-	int	flag;
+	int		i;
+	int		flag;
+	t_list	*first;
 
 	i = -1;
 	flag = 0;
-	while (env[++i])
+	first = *env;
+	while ((*env)->next)
 	{
-		if (strncmp(env[i], str, ft_strlen(str)) == 0 && env[i][ft_strlen(str)] == '=')
+		if ((ft_strncmp((*env)->next->content, str, ft_strlen(str)) == 0)
+			&& ((*env)->next->content[ft_strlen(str)] == '='))
 		{
-			ft_remove(env, i);
+			ft_remove(env);
 			flag = 1;
 		}
+		(*env) = (*env)->next;
 	}
 	if (flag == 0)
 		perror("No such variable");

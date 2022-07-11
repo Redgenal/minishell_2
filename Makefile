@@ -1,6 +1,6 @@
 CC	= gcc
 
-SOURCES	= mainfile.c buildins/ft_cd.c buildins/ft_echo.c buildins/ft_env.c buildins/ft_exit.c buildins/ft_export.c buildins/ft_pwd.c buildins/ft_unset.c
+SOURCES	= mainfile.c buildins/ft_cd.c buildins/ft_echo.c buildins/ft_env.c buildins/ft_exit.c buildins/ft_export.c buildins/ft_pwd.c buildins/ft_unset.c help.c
 
 OBJECTS	= $(SOURCES:%.c=%.o)
 
@@ -18,6 +18,7 @@ all	: $(NAME)
 
 $(NAME)	: $(HEADER) $(OBJECTS)
 	make -C libft
+	make -C libft bonus
 	$(CC) $(FLAGS) $(OBJECTS) $(LIB) -o $(NAME)
 
 %.o	: %.c $(HEADER)

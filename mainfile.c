@@ -14,28 +14,29 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	**my_envp;
+	t_list	*env;
+	t_list	*list;
 	int		i;
 
 	i = 0;
+	env = NULL;
+	(void) argv;
+	(void) argc;
 	while (envp[i])
 		i++;
-	printf("i = %d\n", i);
-	my_envp = malloc(sizeof(char *) * (i + 1));
 	i = -1;
 	while (envp[++i] != NULL)
 	{
-		my_envp[i] = malloc(sizeof(char) * ft_strlen(envp[i]) + 1);
-		ft_strlcpy(my_envp[i], envp[i], ft_strlen(envp[i]) + 1);
-		printf("%s\n", my_envp[i]);
+		list = ft_lstnew(envp[i]);
+		ft_lstadd_back(&env, list);
 	}
-	my_envp[i] = NULL;
-	if (argc == 2)
-		printf("%s, %s" ,argv[0], envp[0]);
-	ft_env(my_envp);
-	ft_pwd();
-	ft_cd("/Users/utawana", my_envp);
-	ft_pwd();
-	ft_env(my_envp);
+	list = ft_lstnew(NULL);
+	// ft_lstadd_back(&env, list);
+	// ft_env(env);
+	// ft_export(&env, NULL);
+	// ft_pwd();
+	// ft_cd("/Users/utawana", &env);
+	// ft_env(env);
+	printf("%d\n", ft_exit(argv[1], argv));
 	return (0);
 }
