@@ -12,11 +12,30 @@
 
 #include "minishell.h"
 
+pid_t	ft_obrabotka(char *str, char **envp)
+{
+	pid_t	pid;
+	char	**cmd;
+
+	pid = fork();
+	if (pid < 0)
+		ft_call_exit();
+	else if (pid == 0)
+	{
+		cmd = ft_delenie_cmd(str);
+		cmd = ft_change_cmd(cmd, envp);
+		execve(cmd[0], cmd, envp);
+		ft_call_cant_exe();
+	}
+	return (pid);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_list	*env;
 	t_list	*list;
 	int		i;
+	char	**my_env;
 
 	i = 0;
 	env = NULL;
@@ -31,12 +50,15 @@ int	main(int argc, char **argv, char **envp)
 		ft_lstadd_back(&env, list);
 	}
 	list = ft_lstnew(NULL);
-	// ft_lstadd_back(&env, list);
+	ft_lstadd_back(&env, list);
+	my_env = ft_from_lists_to_str(env);
+	ft_obrabotka("ls -l", my_env);
 	// ft_env(env);
-	// ft_export(&env, NULL);
+	// ft_export(&env, "A=hello");
 	// ft_pwd();
 	// ft_cd("/Users/utawana", &env);
 	// ft_env(env);
-	printf("%d\n", ft_exit(argv[1], argv));
+	// ft_export(&env, NULL);
+	// printf("%d\n", ft_exit(argv[1], argv));
 	return (0);
 }

@@ -12,13 +12,35 @@
 
 #include "minishell.h"
 
-int	ft_ret_code(int value, char *str)
+int	ft_lists_len(t_list *env)
 {
-	if (str && (value == 0))
-		ft_putstr_fd(str, 1);
-	else if (str && (value == 1))
-		perror(str);
-	else if ((value == 1) && !str)
-		perror("Minishell error:");
-	return (value);
+	int	i;
+
+	i = 0;
+	while (env->next)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
+char	**ft_from_lists_to_str(t_list *env)
+{
+	char	**envp;
+	int		i;
+	int		j;
+
+	i = ft_lists_len(env);
+	envp = malloc(sizeof(char *) * (i + 1));
+	j = -1;
+	while (++j < i)
+	{
+		envp[j] = malloc(sizeof(char) * (ft_strlen(env->content) + 1));
+		envp[j] = ft_memcpy(envp[j], env->content, ft_strlen(env->content) + 1);
+		if (env->next)
+			env = env->next;
+	}
+	envp[j] = NULL;
+	return (envp);
 }

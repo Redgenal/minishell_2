@@ -12,6 +12,21 @@
 
 #include "../minishell.h"
 
+int	ft_ret_code(int value, char *str)
+{
+	if (str && (value == 0))
+		ft_putstr_fd(str, 1);
+	else if (str && (value == 1))
+	{
+		ft_putstr_fd("minishell: export: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
+	else if ((value == 1) && !str)
+		perror("minishell: cd: ");
+	return (value);
+}
+
 int	ft_no_arg(t_list *env)
 {
 	int		i;

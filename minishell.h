@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "pipex/pipex_bonus.h"
 # include <stdio.h>
 
 int		ft_env(t_list *env);
@@ -24,6 +25,8 @@ int		ft_echo(char *str, int flag);
 int		ft_unset(char *str, t_list **env);
 int		ft_exit(char *str, char **strs);
 
-int		ft_ret_code(int value, char *str);
+int		ft_lists_len(t_list *env);
+
+char	**ft_from_lists_to_str(t_list *env);
 
 #endif
