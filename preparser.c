@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:28:49 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/12 20:54:15 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/12 21:13:09 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,25 @@
 // 		return (0);
 // }
 
-int	pre_quote(char *str)
-{
-	int	i;
-	int	o_flag;
-	int	d_flag;
+// int	pre_quote(char *str)
+// {
+// 	int	i;
+// 	int	o_flag;
+// 	int	d_flag;
 
-	o_flag = 0;
-	d_flag = 0;
-	i = 1;
-
-	while (str[i])
-	{
-		if(str)
-	}
+// 	o_flag = -1;
+// 	d_flag = -1;
+// 	i = 1;
+// 	if (str[0] == '\'')
+// 		o_flag = -(o_flag);
+// 	if (str[0] == '\"')
+// 		d_flag = -(d_flag);
+// 	while (str[i])
+// 	{
+// 		if(
+// 	}
 	
-}
+// }
 int	drop_null(char *str, int i, char c)
 {
 	if (str[i] && str[i] == c)
