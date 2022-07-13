@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 
 char	**ft_find_path(char **envp);
@@ -42,10 +43,10 @@ int		**ft_create_pipes(int argc);
 int		ft_choose_child(int **pipes, char **argv, char **envp, int i);
 void	ft_choose_last_child(int **pipes, char **argv, char **envp, int i);
 
-void	ft_call_exit(void);
-void	ft_call_com_not_found(void);
-void	ft_call_cant_open(void);
-void	ft_call_cant_exe(void);
+void	ft_call_exit(char *s);
+void	ft_call_com_not_found(char *s);
+void	ft_call_cant_open(char *s);
+void	ft_call_cant_exe(char *s);
 void	ft_close_all(int **pipes, int argc);
 void	ft_free_all(int **pipes, int argc);
 

@@ -25,6 +25,16 @@ int	ft_lists_len(t_list *env)
 	return (i);
 }
 
+int	ft_arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	return (i);
+}
+
 char	**ft_from_lists_to_str(t_list *env)
 {
 	char	**envp;

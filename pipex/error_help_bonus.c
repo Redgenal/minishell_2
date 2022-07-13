@@ -12,26 +12,34 @@
 
 #include "pipex_bonus.h"
 
-void	ft_call_exit(void)
+void	ft_call_exit(char *str)
 {
-	perror("Eror");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": minishell moment\n", 2);
 	exit(1);
 }
 
-void	ft_call_com_not_found(void)
+void	ft_call_com_not_found(char *str)
 {
-	perror("command not found");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": coomand not found\n", 2);
 	exit(127);
 }
 
-void	ft_call_cant_open(void)
+void	ft_call_cant_open(char *str)
 {
-	perror("Can not open");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": can not open\n", 2);
 	exit(0);
 }
 
-void	ft_call_cant_exe(void)
+void	ft_call_cant_exe(char *str)
 {
-	perror("Command invoked cannot execute");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": can not exequte\n", 2);
 	exit(127);
 }

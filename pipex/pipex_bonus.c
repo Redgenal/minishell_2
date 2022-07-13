@@ -21,18 +21,18 @@ void	ft_for_first_child(int **pipe, char **argv, char **envp, int i)
 
 	fd1 = open(argv[1], O_RDONLY);
 	if (fd1 == -1)
-		ft_call_cant_open();
+		ft_call_cant_open("Error");
 	d1 = dup2(fd1, 0);
 	if (d1 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	d2 = dup2(pipe[0][1], 1);
 	if (d2 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	close(pipe[0][0]);
 	cmd = ft_delenie_cmd(argv[i]);
 	cmd = ft_change_cmd(cmd, envp);
 	execve(cmd[0], cmd, envp);
-	ft_call_cant_exe();
+	ft_call_cant_exe(cmd[0]);
 }
 
 void	ft_for_last_child(int **pipe, char **argv, char **envp, int i)
@@ -44,19 +44,19 @@ void	ft_for_last_child(int **pipe, char **argv, char **envp, int i)
 
 	fd2 = open(argv[i + 3], O_CREAT | O_TRUNC | O_RDWR, 0777);
 	if (fd2 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	d1 = dup2(pipe[i - 1][0], 0);
 	if (d1 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	d2 = dup2(fd2, 1);
 	if (d2 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	close(pipe[i - 1][0]);
 	close(pipe[i - 1][1]);
 	cmd = ft_delenie_cmd(argv[i + 2]);
 	cmd = ft_change_cmd(cmd, envp);
 	execve(cmd[0], cmd, envp);
-	ft_call_cant_exe();
+	ft_call_cant_exe(cmd[0]);
 }
 
 void	ft_for_circle_child(int **pipe, char **argv, char **envp, int i)
@@ -67,17 +67,17 @@ void	ft_for_circle_child(int **pipe, char **argv, char **envp, int i)
 
 	d1 = dup2(pipe[i - 1][0], 0);
 	if (d1 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	d2 = dup2(pipe[i][1], 1);
 	if (d2 == -1)
-		ft_call_exit();
+		ft_call_exit("Error");
 	close(pipe[i - 1][0]);
 	close(pipe[i - 1][1]);
 	close(pipe[i][0]);
 	cmd = ft_delenie_cmd(argv[i + 2]);
 	cmd = ft_change_cmd(cmd, envp);
 	execve(cmd[0], cmd, envp);
-	ft_call_cant_exe();
+	ft_call_cant_exe(cmd[0]);
 }
 
 pid_t	ft_circle_function(int **pipes, int argc, char **argv, char **envp)
@@ -94,7 +94,7 @@ pid_t	ft_circle_function(int **pipes, int argc, char **argv, char **envp)
 			close(pipes[i - 1][1]);
 		pid = fork();
 		if (pid < 0)
-			ft_call_exit();
+			ft_call_exit("Error");
 		else if (pid == 0)
 		{
 			if (i < (argc - 4))
@@ -115,7 +115,7 @@ int	pipex(int argc, char **argv, char **envp)
 	pid_t	pid;
 
 	if (argc <= 4)
-		ft_call_exit();
+		ft_call_exit("Error");
 	pipes = ft_create_pipes(argc);
 	if (!pipes)
 		return (1);

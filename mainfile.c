@@ -19,14 +19,17 @@ pid_t	ft_obrabotka(char *str, char **envp)
 
 	pid = fork();
 	if (pid < 0)
-		ft_call_exit();
+		ft_call_exit("Error");
 	else if (pid == 0)
 	{
 		cmd = ft_delenie_cmd(str);
 		cmd = ft_change_cmd(cmd, envp);
 		execve(cmd[0], cmd, envp);
-		ft_call_cant_exe();
+		if (S_ISDIR(cmd[0])) //???
+			printf("Hello\n");
+		ft_call_cant_exe(cmd[0]);
 	}
+	printf("Hello\n");
 	return (pid);
 }
 
@@ -52,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	list = ft_lstnew(NULL);
 	ft_lstadd_back(&env, list);
 	my_env = ft_from_lists_to_str(env);
-	ft_obrabotka("ls -l", my_env);
+	ft_obrabotka("./pipex", my_env);
 	// ft_env(env);
 	// ft_export(&env, "A=hello");
 	// ft_pwd();

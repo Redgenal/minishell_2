@@ -23,7 +23,7 @@ char	**ft_find_path(char **envp)
 			break ;
 	arr = ft_split(envp[i] + 5, ':');
 	if (arr == NULL)
-		ft_call_exit();
+		ft_call_exit("Error");
 	return (arr);
 }
 
@@ -47,7 +47,7 @@ char	**ft_check_file(char **arr, char **cmd)
 	{
 		tmp = ft_strjoin(ft_strjoin(arr[i], "/"), cmd[0]);
 		if (tmp == NULL)
-			ft_call_com_not_found();
+			ft_call_com_not_found(cmd[0]);
 		if (access(tmp, 0))
 			free(tmp);
 		else
@@ -75,13 +75,13 @@ char	**ft_change_cmd(char **cmd, char **envp)
 	char	**cmd2;
 
 	if (cmd[0] == NULL)
-		ft_call_com_not_found();
+		ft_call_com_not_found(cmd[0]);
 	path = ft_find_path(envp);
 	cmd1 = ft_first_check_file(cmd);
 	if (cmd1 != NULL)
 		return (cmd1);
 	cmd2 = ft_check_file(path, cmd);
 	if (cmd2 == NULL)
-		ft_call_com_not_found();
+		ft_call_com_not_found(cmd[0]);
 	return (cmd2);
 }
