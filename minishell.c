@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/08 23:40:15 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/16 02:46:39 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sig_int(int sig)
 	(void)sig;
 }
 
-int	minishell(void)
+int	minishell(char **env)
 {
 	char	*str;
 	int		pre;
@@ -38,8 +38,10 @@ int	minishell(void)
 			return (0);
 		}
 		pre = ft_prepars(str);
-		if (pre == 1)
-			continue ;
+		if (!pre)
+		{
+			ft_parser(str, env);
+		}
 		free (str);
 	}
 	free (str);
@@ -62,5 +64,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, SIG_IGN);
-	return (minishell());
+	return (minishell(env));
 }
