@@ -24,7 +24,7 @@ void	ft_call_com_not_found(char *str)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": coomand not found\n", 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	exit(127);
 }
 
@@ -40,6 +40,14 @@ void	ft_call_cant_exe(char *str)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": can not exequte\n", 2);
+	ft_putstr_fd(": command not found\n", 2);
 	exit(127);
+}
+
+void	ft_is_a_dir(char *str)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": is a directory\n", 2);
+	exit(126);
 }

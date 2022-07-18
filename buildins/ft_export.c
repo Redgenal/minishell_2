@@ -54,7 +54,7 @@ int	ft_export(t_list **env, char *str)
 	t_list	*first;
 
 	first = *env;
-	if (!str)
+	if (str == NULL)
 		ft_no_arg(*env);
 	else
 	{

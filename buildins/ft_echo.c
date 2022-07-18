@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-int	ft_echo(char *str, int flag)
+int	ft_echo(char *str, char *flag)
 {
-	if (flag == 1)
+	if (ft_strncmp(flag, "-n", 3) == 0)
 		printf("%s", str);
 	else
 		printf("%s\n", str);

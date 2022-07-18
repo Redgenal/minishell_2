@@ -24,7 +24,8 @@ pid_t	ft_obrabotka(char *str, char **envp)
 		ft_call_exit("Error");
 	else if (pid == 0)
 	{
-		if (dir = opendir(str))
+		dir = opendir(str);
+		if (dir && str[0] == '.')
 			ft_is_a_dir(str);
 		cmd = ft_delenie_cmd(str);
 		cmd = ft_change_cmd(cmd, envp);
@@ -40,15 +41,15 @@ int	ft_for_buildins(char *com, t_list **env, char **arg)
 		return (ft_cd(arg[0], env));
 	else if (ft_strncmp(com, "env", 4) == 0)
 		return (ft_env(*env));
-	else if (ft_strncmp(com, "export", 4) == 0)
-		return (ft_export(env, arg[0]));
-	else if (ft_strncmp(com, "echo", 4) == 0)
-		return (ft_echo(arg[0]));
-	else if (ft_strncmp(com, "exit", 4) == 0)
+	else if (ft_strncmp(com, "export", 7) == 0)
+		return (ft_export(env, NULL));
+	else if (ft_strncmp(com, "echo", 5) == 0)
+		return (ft_echo(arg[0], arg[1]));
+	else if (ft_strncmp(com, "exit", 5) == 0)
 		return (ft_exit(arg[0], arg));
 	else if (ft_strncmp(com, "pwd", 4) == 0)
 		return (ft_pwd());
-	else if (ft_strncmp(com, "unset", 4) == 0)
+	else if (ft_strncmp(com, "unset", 6) == 0)
 		return (ft_unset(arg[0], env));
 	else
 		return (666);
@@ -63,7 +64,6 @@ int	main(int argc, char **argv, char **envp)
 
 	i = 0;
 	env = NULL;
-	(void) argv;
 	(void) argc;
 	while (envp[i])
 		i++;
@@ -75,10 +75,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 	list = ft_lstnew(NULL);
 	ft_lstadd_back(&env, list);
-	if (ft_for_buildins("cd", env, argv) == 666)
+	if (ft_for_buildins("Desktop", &env, argv) == 666)
 	{
 		my_env = ft_from_lists_to_str(env);
-		ft_obrabotka("./pipex", my_env);
+		ft_obrabotka("pipex", my_env);
 	}
 	// ft_env(env);
 	// ft_export(&env, "A=hello");

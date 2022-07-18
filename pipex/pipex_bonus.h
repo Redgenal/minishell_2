@@ -47,6 +47,7 @@ void	ft_call_exit(char *s);
 void	ft_call_com_not_found(char *s);
 void	ft_call_cant_open(char *s);
 void	ft_call_cant_exe(char *s);
+void	ft_is_a_dir(char *str);
 void	ft_close_all(int **pipes, int argc);
 void	ft_free_all(int **pipes, int argc);
 
