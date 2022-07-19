@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 04:57:54 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/16 04:58:39 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/19 06:24:27 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*s_quote(char *str, int *i)
 	tmp2 = ft_strdup (str + *i + 1);
 	tmp = ft_strjoin(tmp, tmp1);
 	tmp = ft_strjoin(tmp, tmp2);
-	free(str);
 	return (tmp);
 }
 
@@ -40,10 +39,11 @@ char	*ft_slesh(char *str, int *i)
 	char	*tmp1;
 
 	tmp = ft_substr(str, 0, *i);
-	tmp1 = ft_strdup (str + *i + 1);
+	tmp1 = ft_substr(str, *i + 1, strlen(str) - *i - 1);
 	tmp = ft_strjoin(tmp, tmp1);
-	++(*i);
-	free (str);
+	free(tmp1);
+	free(str);
+	(*i)++;
 	return (tmp);
 }
 
@@ -68,6 +68,19 @@ char	*d_quote(char *str, int *i)
 	tmp2 = ft_strdup(str + *i + 1);
 	tmp = ft_strjoin(tmp, tmp1);
 	tmp = ft_strjoin(tmp, tmp2);
-	free (str);
+	return (tmp);
+}
+
+char	*ft_drop_slesh(char *str, int *i)
+{
+	char	*tmp;
+	char	*tmp1;
+
+	tmp = ft_substr(str, 0, *i);
+	tmp1 = ft_substr(str, *i + 1, strlen(str) - *i - 1);
+	tmp = ft_strjoin(tmp, tmp1);
+	free(tmp1);
+	free(str);
+	(*i)++;
 	return (tmp);
 }

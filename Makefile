@@ -1,6 +1,6 @@
 CC	= gcc
 
-SOURCES	= minishell.c preparser.c preparser_utils.c preparser_two.c preparser_three.c parser.c
+SOURCES	= minishell.c preparser.c preparser_utils.c preparser_two.c preparser_three.c parser.c parser_utils.c
 
 OBJECTS	= $(SOURCES:%.c=%.o)
 

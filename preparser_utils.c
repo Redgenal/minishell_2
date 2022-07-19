@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 22:59:08 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/16 02:35:16 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/18 23:52:36 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	drop_null(char *str, int i, char c)
 		i++;
 	while (str[i] && str[i] != c)
 	{
-		if (ft_isalnum(str[i]) || str[i] == '$' || str[i] == '?')
+		if (ft_isalnum(str[i]) || str[i] == '$' \
+		|| str[i] == '?' || str[i] == '\'' || str[i] == '\"')
 			return (0);
 		i++;
 	}

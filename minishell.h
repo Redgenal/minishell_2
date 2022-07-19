@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/16 02:45:01 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/19 06:15:30 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,10 @@ int		pre_quote(char *str, int len);
 void	pre_o_quote(char *str, int *i, int *o_flag);
 void	pre_d_quote(char *str, int *i, int *d_flag);
 int		ft_parser(char *str, char **env);
+
+char	*s_quote(char *str, int *i);
+char	*ft_slesh(char *str, int *i);
+char	*d_quote(char *str, int *i);
+char	*ft_drop_slesh(char *str, int *i);
 
 #endif

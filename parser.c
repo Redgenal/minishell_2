@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/16 04:56:00 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/19 06:45:10 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_count_of_pipes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		pre_o_quote(str, &i, &o_flag);
-		pre_d_quote(str, &i, &d_flag);
+		//pre_o_quote(str, &i, &o_flag);
+		//pre_d_quote(str, &i, &d_flag);
 		if (o_flag < 0 && d_flag < 0 && str[i] == '|')
 			count ++;
 		i++;
@@ -47,13 +47,19 @@ char	*get_full_str(char *str, int *i)
 	j = *i;
 	while (str[*i] && str[*i] != '|')
 	{
-		pre_o_quote(str, i, &o_flag);
-		pre_d_quote(str, i, &d_flag);
+		 pre_o_quote(str, i, &o_flag);
+		 pre_d_quote(str, i, &d_flag);
 		(*i)++;
 	}
 	tmp = ft_substr(str, j, *i - j);
+	tmp[*i - j + 1] = '\0';
 	return (tmp);
 }
+
+// void ft_parse_str(char **param)
+// {
+	
+// }
 
 void	get_list_str(char *str)
 {
@@ -65,22 +71,55 @@ void	get_list_str(char *str)
 	i = 0;
 	j = 0;
 	count_pipe = ft_count_of_pipes(str);
-	param = (char **) malloc (sizeof(char *) * (count_pipe + 1));
+	param = (char **) malloc (sizeof(char *) * (count_pipe + 2));
 	while (str[i] && j < (count_pipe + 1))
 	{
 		param[j] = get_full_str(str, &i);
 		i++;
 		j++;
 	}
+	param[j] = NULL;
+	i = 0;
+	j = 0;
+	while (i < count_pipe + 1)
+	{
+		j = 0;
+		while (param[i][j] != '\0')
+		{
+//			printf("str = %s\n", param[i]);
+			if (param[i][j] == '\\' && pre_slesh(param[i], j) && (param[i][j + 1] == '\'' \
+				|| param[i][j + 1] != '\"'))
+				param[i] = ft_drop_slesh(param[i], &j);
+//			printf("str1 = %s\n", param[i]);
+			if (param[i][j] == '\\' && param[i][j + 1] != '\0' \
+				&& param[i][j + 1] == '\\')
+				param[i] = ft_slesh(param[i], &j);
+//			printf("str2 = %s\n", param[i]);
+			 if (param[i][j] == '\'')
+			 	param[i] = s_quote(param[i], &j);
+//			printf("str3 = %s\n\n", param[i]);
+			// if (param[i][j] == '\"')
+			// 	param[i] = d_quote(param[i], &j);
+			j++;
+		}
+		i ++;
+	}
+	i = 0;
+	while (i < count_pipe + 2)
+	{
+		printf("str = %s\n", param[i]);
+		i++;
+	}
+//	ft_parse_str(param);
 }
 
 int	ft_parser(char *str, char **env)
 {
 	int	i;
-	int	coun_pipe;
+	int	count_pipe;
 
 	i = 0;
-	coun_pipe = ft_count_of_pipes(str);
+	count_pipe = ft_count_of_pipes(str);
 	env = NULL;
 	get_list_str(str);
 	// while (str[i])
@@ -93,7 +132,7 @@ int	ft_parser(char *str, char **env)
 	// 		str = d_quote(str, &i);
 	// 	i++;
 	// }
-	printf("\n\n\ncount pipes = %d\n", coun_pipe);
-	printf("%s\n", str);
+	// printf("\n\n\ncount pipes = %d\n", count_pipe);
+	// printf("%s\n", str);
 	return (0);
 }

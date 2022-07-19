@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 23:36:13 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/16 02:30:39 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/19 00:58:16 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,27 @@ int	pre_redir_one(char *str, int i)
 
 int	pre_redir_two(char *str, int i, int drop)
 {
-	if (str[i] == '<' && str[i + 1] != '\0' && str[i + 1] == '>')
-	{
-		printf("Syntax error near unexpected token '<>'\n");
-		return (1);
-	}
 	if (str[i] == '>' || str[i] == '<')
 	{
 		drop = drop_null(str, i + 1, '>');
-		if (drop == 1)
-			printf("Syntax error near unexpected token '>'\n");
-		if (drop == 2)
-			printf("Syntax error near unexpected token '>>'\n");
+		if (drop != 0)
+		{
+			if (drop == 1)
+				printf("Syntax error near unexpected token '>'\n");
+			if (drop == 2)
+				printf("Syntax error near unexpected token '>>'\n");
+			return (1);
+		}
 		drop = drop_null(str, i + 1, '<');
-		if (drop == 1)
-			printf("Syntax error near unexpected token '<'\n");
-		if (drop == 2)
-			printf("Syntax error near unexpected token '<<'\n");
-		return (1);
+		if (drop != 0)
+		{
+			if (drop == 1)
+				printf("Syntax error near unexpected token '<'\n");
+			if (drop == 2)
+				printf("Syntax error near unexpected token '<<'\n");
+			return (1);
+		}
+		return (0);
 	}
 	return (0);
 }
@@ -91,6 +94,11 @@ int	find_double(char *str, int i)
 	int	drop;
 
 	drop = 0;
+	if (str[i] == '<' && str[i + 1] != '\0' && str[i + 1] == '>')
+	{
+		printf("Syntax error near unexpected token '<>'\n");
+		return (1);
+	}
 	if (pre_redir_one(str, i))
 		return (1);
 	if (pre_redir_two(str, i, drop))
