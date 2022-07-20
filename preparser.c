@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:28:49 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/19 06:27:51 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:50:37 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	pre_o_quote(char *str, int *i, int *o_flag)
 		while (str[*i] && str[*i] != '\'')
 		{
 			(*i)++;
-//			if (str[*i] == '\'' && pre_slesh(str, *i))
-//				(*i)++;
+			// if (str[*i] == '\'' && pre_slesh(str, *i))
+			// 	(*i)++;
 		}
 		if (str[*i] == '\'')
 			*o_flag = *(o_flag) * (-1);
