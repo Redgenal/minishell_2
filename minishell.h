@@ -18,6 +18,20 @@
 # include <stdio.h>
 # include <dirent.h>
 
+typedef struct	s_redir
+{
+    int				type;
+	char			*file;
+    struct s_redir	*next;
+}	p_redir;
+
+typedef struct	s_lis
+{
+    char			**args;
+    struct s_lis	*next;
+	p_redir			*redir;
+}	p_lis;
+
 int		ft_env(t_list *env);
 int		ft_export(t_list **env, char *str);
 int		ft_pwd(void);

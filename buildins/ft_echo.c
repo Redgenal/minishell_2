@@ -14,7 +14,7 @@
 
 int	ft_echo(char *str, char *flag)
 {
-	if (ft_strncmp(flag, "-n", 3) == 0)
+	if (flag != NULL && ft_strncmp(flag, "-n", 3) == 0)
 		printf("%s", str);
 	else
 		printf("%s\n", str);

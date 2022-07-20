@@ -18,10 +18,10 @@ int	**ft_create_pipes(int argc)
 	int	i;
 
 	i = -1;
-	pipes = (int **)malloc(sizeof(int *) * (argc - 4));
+	pipes = (int **)malloc(sizeof(int *) * (argc - 1));
 	if (!pipes)
 		return (NULL);
-	while (++i < (argc - 4))
+	while (++i < (argc - 1))
 	{
 		pipes[i] = (int *)malloc(sizeof(int) * 2);
 		if (!pipes[i])
