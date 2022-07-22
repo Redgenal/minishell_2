@@ -12,21 +12,17 @@
 
 #include "pipex_bonus.h"
 
-int	ft_here_doc(char *stop, char **argv)
+int	ft_here_doc(char *stop)
 {
 	int		pip[2];
 	char	*buff;
-	int		i;
 
 	buff = malloc(sizeof(*buff));
 	pipe(pip);
 	while (buff != NULL)
 	{
 		free(buff);
-		i = 5;
-		while (argv[i++] != NULL)
-			write(1, "pipe ", 5);
-		write(1, "heredoc> ", 9);
+		write(1, "> ", 1);
 		buff = get_next_line(0);
 		if (ft_strncmp(buff, stop, ft_strlen(stop) + 1) == 0)
 			break ;

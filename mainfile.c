@@ -41,7 +41,7 @@ int	ft_for_buildins(char *com, t_list **env, char **arg)
 	else if (ft_strncmp(com, "env", 4) == 0)
 		return (ft_env(*env));
 	else if (ft_strncmp(com, "export", 7) == 0)
-		return (ft_export(env, NULL));
+		return (ft_export(env, arg[1]));
 	else if (ft_strncmp(com, "echo", 5) == 0)
 		return (ft_echo(arg[1], arg[2]));
 	else if (ft_strncmp(com, "exit", 5) == 0)
@@ -83,12 +83,6 @@ int	ft_for_buildins(char *com, t_list **env, char **arg)
 // 	return (pid);
 // }
 
-int	ft_dup_call(p_lis *p_list, t_list **env, char **my_env)
-{
-	if (ft_for_buildins(p_list->args[0], &env, p_list->args) == 666)
-		ft_obrabotka(p_list->args, my_env);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_list	*env;
@@ -98,13 +92,13 @@ int	main(int argc, char **argv, char **envp)
 	// int		**pipes;
 	int		status;
 	// pid_t	pid;
-	p_lis	*p_list;
+	t_lis	*p_list;
 
 	env = NULL;
 	(void) argc;
 	(void) argv;
 	i = -1;
-	p_list = (p_lis *) malloc(sizeof(*p_list));
+	p_list = (t_lis *) malloc(sizeof(*p_list));
 	if (!p_list)
 		return (0);
 	p_list->args = malloc(sizeof(char *) * 3);
@@ -114,7 +108,13 @@ int	main(int argc, char **argv, char **envp)
 	ft_strlcpy(p_list->args[1], argv[2], (ft_strlen(argv[2]) + 1));
 	p_list->args[2] = NULL;
 	p_list->next = NULL;
-	p_list->redir = NULL;
+	p_list->redir = (t_redir *) malloc(sizeof(*p_list->redir));
+	p_list->redir->file = "4.txt";
+	p_list->redir->type = 1;
+	p_list->redir->next = (t_redir *) malloc(sizeof(*p_list->redir));
+	p_list->redir->next->file = "2.txt";
+	p_list->redir->next->type = 1;
+	p_list->redir->next->next = NULL;
 	while (envp[++i] != NULL)
 	{
 		list = ft_lstnew(envp[i]);
@@ -123,12 +123,14 @@ int	main(int argc, char **argv, char **envp)
 	list = ft_lstnew(NULL);
 	ft_lstadd_back(&env, list);
 	my_env = ft_from_lists_to_str(env);
-	if (p_list->next == NULL)
+	while (p_list != NULL)
 	{
 		if (p_list->redir != NULL)
-			ft_dup_call(p_list, &env, my_env);
-		if (ft_for_buildins(p_list->args[0], &env, p_list->args) == 666)
-			ft_obrabotka(p_list->args, my_env);
+			status = ft_dup_call(p_list, &env, my_env);
+		else
+			if (ft_for_buildins(p_list->args[0], &env, p_list->args) == 666)
+				ft_obrabotka(p_list->args, my_env);
+		p_list = p_list->next;
 	}
 	// else
 	// {
@@ -140,12 +142,5 @@ int	main(int argc, char **argv, char **envp)
 	// 	waitpid(pid, &status, 0);
 	// 	ft_free_all(pipes, ft_lists_len(p_list));
 	// }
-	// ft_env(env);
-	// ft_export(&env, "A=hello");
-	// ft_pwd();
-	// ft_cd("/Users/utawana", &env);
-	// ft_env(env);
-	// ft_export(&env, NULL);
-	// printf("%d\n", ft_exit(argv[1], argv));
 	return (WEXITSTATUS(status));
 }

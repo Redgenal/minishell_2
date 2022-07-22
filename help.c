@@ -54,3 +54,26 @@ char	**ft_from_lists_to_str(t_list *env)
 	envp[j] = NULL;
 	return (envp);
 }
+
+int	ft_here_doc(char *stop)
+{
+	int		pip[2];
+	char	*buff;
+
+	buff = malloc(sizeof(*buff));
+	pipe(pip);
+	while (buff != NULL)
+	{
+		free(buff);
+		write(1, "> ", 2);
+		buff = get_next_line(0);
+		if (ft_strncmp(buff, stop, ft_strlen(stop) + 1) == 0)
+			break ;
+		write(pip[1], buff, ft_strlen(buff));
+		write(pip[1], "\n", 1);
+	}
+	if (buff)
+		free(buff);
+	close(pip[1]);
+	return (pip[0]);
+}
