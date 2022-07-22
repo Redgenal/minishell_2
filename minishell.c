@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/19 00:58:41 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:29:02 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int argc, char **argv, char **env)
 	p.c_lflag &= ~(ECHOCTL);
 	tcsetattr(0, 0, &p);
 	argv = NULL;
-	env = NULL;
 	if (argc > 1)
 	{
 		printf("%s\n", "The programm must not have arguments");
