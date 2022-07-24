@@ -77,3 +77,16 @@ int	ft_here_doc(char *stop)
 	close(pip[1]);
 	return (pip[0]);
 }
+
+int	ft_liss_len(t_lis *env)
+{
+	int	i;
+
+	i = 1;
+	while (env->next)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}

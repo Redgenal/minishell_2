@@ -52,32 +52,32 @@ void	ft_close_all(int **pipes, int argc)
 	}
 }
 
-int	ft_choose_child(int **pipes, char **argv, char **envp, int i)
-{
-	if ((ft_strncmp(argv[1], "here_doc", 8) == 0))
-	{
-		if (i == 0)
-		{
-			ft_for_first_hand_child(pipes, argv, envp, 3);
-			return (1);
-		}
-		else
-			ft_for_circle_hand_child(pipes, argv, envp, i);
-	}
-	else
-	{
-		if (i == 0)
-			ft_for_first_child(pipes, argv, envp, 2);
-		else
-			ft_for_circle_child(pipes, argv, envp, i);
-	}
-	return (0);
-}
+// int	ft_choose_child(int **pipes, char **argv, char **envp, int i)
+// {
+// 	if ((ft_strncmp(argv[1], "here_doc", 8) == 0))
+// 	{
+// 		if (i == 0)
+// 		{
+// 			ft_for_first_hand_child(pipes, argv, envp, 3);
+// 			return (1);
+// 		}
+// 		else
+// 			ft_for_circle_hand_child(pipes, argv, envp, i);
+// 	}
+// 	else
+// 	{
+// 		if (i == 0)
+// 			ft_for_first_child(pipes, argv, envp, 2);
+// 		else
+// 			ft_for_circle_child(pipes, argv, envp, i);
+// 	}
+// 	return (0);
+// }
 
-void	ft_choose_last_child(int **pipes, char **argv, char **envp, int i)
-{
-	if ((ft_strncmp(argv[1], "here_doc", 8) == 0))
-		ft_for_last_hand_child(pipes, argv, envp, i);
-	else
-		ft_for_last_child(pipes, argv, envp, i);
-}
+// void	ft_choose_last_child(int **pipes, char **argv, char **envp, int i)
+// {
+// 	if ((ft_strncmp(argv[1], "here_doc", 8) == 0))
+// 		ft_for_last_hand_child(pipes, argv, envp, i);
+// 	else
+// 		ft_for_last_child(pipes, argv, envp, i);
+// }

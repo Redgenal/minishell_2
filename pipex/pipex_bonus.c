@@ -86,9 +86,9 @@ pid_t	ft_circle_function(int **pipes, int argc, char **argv, char **envp)
 	pid_t	pid;
 
 	i = -1;
-	while (++i <= (argc - 4))
+	while (++i <= argc)
 	{
-		if (i < (argc - 4))
+		if (i < argc)
 			pipe(pipes[i]);
 		if (i > 0)
 			close(pipes[i - 1][1]);
@@ -97,7 +97,7 @@ pid_t	ft_circle_function(int **pipes, int argc, char **argv, char **envp)
 			ft_call_exit("Error");
 		else if (pid == 0)
 		{
-			if (i < (argc - 4))
+			if (i < argc)
 				argc -= ft_choose_child(pipes, argv, envp, i);
 			else
 				ft_choose_last_child(pipes, argv, envp, i);

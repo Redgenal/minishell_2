@@ -46,9 +46,11 @@ int		ft_perm_denied(char *str);
 
 int		ft_here_doc(char *stop);
 int		ft_lists_len(t_list *env);
+int		ft_liss_len(t_lis *env);
 
 int		ft_dup_call(t_lis *p_list, t_list **env, char **my_env);
 int		ft_for_buildins(char *com, t_list **env, char **arg);
+int		ft_do_ur_job(t_lis *p_list, t_list **env, char **my_env);
 
 char	**ft_from_lists_to_str(t_list *env);
 

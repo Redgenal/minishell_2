@@ -89,12 +89,16 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*list;
 	int		i;
 	char	**my_env;
-	// int		**pipes;
+	int		**pipes;
 	int		status;
 	// pid_t	pid;
 	t_lis	*p_list;
+	t_lis	*p_one;
+	int		d1;
+	int		d2;
 
 	env = NULL;
+	pipes = NULL;
 	(void) argc;
 	(void) argv;
 	i = -1;
@@ -107,14 +111,25 @@ int	main(int argc, char **argv, char **envp)
 	p_list->args[1] = malloc(sizeof(char) * (ft_strlen(argv[2]) + 1));
 	ft_strlcpy(p_list->args[1], argv[2], (ft_strlen(argv[2]) + 1));
 	p_list->args[2] = NULL;
+	p_list->redir = NULL;
 	p_list->next = NULL;
-	p_list->redir = (t_redir *) malloc(sizeof(*p_list->redir));
-	p_list->redir->file = "4.txt";
-	p_list->redir->type = 1;
-	p_list->redir->next = (t_redir *) malloc(sizeof(*p_list->redir));
-	p_list->redir->next->file = "2.txt";
-	p_list->redir->next->type = 1;
-	p_list->redir->next->next = NULL;
+	// p_list->redir = (t_redir *) malloc(sizeof(*p_list->redir));
+	// p_list->redir->file = "2.txt";
+	// p_list->redir->type = 1;
+	// p_list->redir->next = (t_redir *) malloc(sizeof(*p_list->redir));
+	// p_list->redir->next->file = "4.txt";
+	// p_list->redir->next->type = 1;
+	// p_list->redir->next->next = NULL;
+	//
+	p_list->next = (t_lis *) malloc(sizeof(*p_list));
+	p_list->next->args = malloc(sizeof(char *) * 3);
+	p_list->next->args[0] = malloc(sizeof(char) * (ft_strlen(argv[3]) + 1));
+	ft_strlcpy(p_list->next->args[0], argv[3], (ft_strlen(argv[3]) + 1));
+	p_list->next->args[1] = malloc(sizeof(char) * (ft_strlen(argv[4]) + 1));
+	ft_strlcpy(p_list->next->args[1], argv[4], (ft_strlen(argv[4]) + 1));
+	p_list->next->args[2] = NULL;
+	p_list->next->next = NULL;
+	p_list->next->redir = NULL;
 	while (envp[++i] != NULL)
 	{
 		list = ft_lstnew(envp[i]);
@@ -123,15 +138,64 @@ int	main(int argc, char **argv, char **envp)
 	list = ft_lstnew(NULL);
 	ft_lstadd_back(&env, list);
 	my_env = ft_from_lists_to_str(env);
+	p_one = p_list;
+	if (p_list->next != NULL)
+	{
+		pipes = ft_create_pipes(ft_liss_len(p_list));
+		if (!pipes)
+			return (1);
+	}
+	i = 0;
 	while (p_list != NULL)
 	{
+		if (i <= (ft_liss_len(p_one) - 1))
+		{
+			if (i < (ft_liss_len(p_one) - 1))
+				pipe(pipes[i]);
+			if (i == 0)
+			{
+				d2 = dup2(pipes[i][1], 1);
+				if (!d1)
+					ft_call_exit("dup error");
+				close(pipes[i][0]);
+			}
+			else if (i == (ft_liss_len(p_one) - 1))
+			{
+				close(pipes[i - 1][1]);
+				d1 = dup2(pipes[i - 1][0], 0);
+				if (!d2)
+					ft_call_exit("dup error");
+				int fd;
+				fd = open(argv[5], O_CREAT | O_RDWR | O_TRUNC, 0777);
+				d1 = dup2(fd, STDOUT_FILENO);
+				if (!d2)
+					ft_call_exit("dup error");
+			}
+			else
+			{
+				d1 = dup2(pipes[i - 1][0], 0);
+				if (d1 == -1)
+					ft_call_exit("dup error");
+				d2 = dup2(pipes[i][1], 1);
+				if (d2 == -1)
+					ft_call_exit("dup error");
+				close(pipes[i - 1][1]);
+				close(pipes[i - 1][0]);
+				close(pipes[i][0]);
+				close(pipes[i][1]);
+			}
+		}
 		if (p_list->redir != NULL)
 			status = ft_dup_call(p_list, &env, my_env);
 		else
-			if (ft_for_buildins(p_list->args[0], &env, p_list->args) == 666)
-				ft_obrabotka(p_list->args, my_env);
+			status = ft_do_ur_job(p_list, &env, my_env);
+		
+		i++;
 		p_list = p_list->next;
 	}
+	// waitpid(pid, &status, 0);
+	if (pipes)
+		ft_free_all(pipes, ft_liss_len(p_one));
 	// else
 	// {
 	// 	pipes = ft_create_pipes(ft_lists_len(p_list));
