@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/22 16:29:41 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:26:51 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,18 @@ void	get_list_str(char *str, char **env)
 			if (param[i][j] == '\'')
 				param[i] = s_quote(param[i], &j);
 
-			printf("end_symb = %c\n", param[i][j]);
+//			printf("end_symb = %c\n", param[i][j]);
 			if (param[i][j])
 	 			j++;
 	 	}
 	 	i ++;
 	}
-	// i = 0;
-	// while (param[i])
-	// {
-	// 	printf("str = %s\n", param[i]);
-	// 	i++;
-	// }
+	i = 0;
+	while (param[i])
+	{
+		printf("str = %s\n", param[i]);
+		i++;
+	}
 //	ft_parse_str(param);
 }
 

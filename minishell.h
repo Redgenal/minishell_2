@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/22 15:38:12 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 17:58:40 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		ft_count_slesh(char *str, int i);
 char	*ft_parse_slesh(char *str, int *i);
 char	*ft_mini_slesh(char *str, int *i);
 char	*ft_dollar(char *str, int *i, char **env);
+char	*ft_get_dollar(char *str, int *i, char **env, int *flag);
 
 #endif
