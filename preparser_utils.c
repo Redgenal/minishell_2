@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 22:59:08 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/20 17:36:51 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 21:38:57 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	pre_slesh(char *str, int i)
 	int	j;
 
 	j = 0;
-	i--;
+	if (i != 0)
+		i--;
 	while (str[i] == '\\' && i >= 0)
 	{	
 		j++;

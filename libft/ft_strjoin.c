@@ -6,36 +6,38 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:44:38 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 15:10:46 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:54:48 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*p;
-	size_t			i;
-	size_t			k;
-	int				size;
+	int		i;
+	int		len1;
+	int		len2;
+	char	*str;
 
-	if (!s1)
-		return (0);
-	size = ft_strlen ((char *)s1) + ft_strlen ((char *)s2);
-	p = (char *) malloc(sizeof(*p) * size);
-	i = 0;
-	k = 0;
-	if (!p)
-		return (0);
-	while (s1[i])
+	if (s1 && s2)
 	{
-		p[i] = s1[i];
-		i++;
+		len1 = ft_strlen(s1);
+		len2 = ft_strlen(s2);
+		str = (char*)malloc(sizeof(char) * (len1 + len2 + 1));
+		if (str == NULL)
+			return (NULL);
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		i = -1;
+		while (s2[++i])
+		{
+			str[len1] = s2[i];
+			len1++;
+		}
+		str[len1] = '\0';
+		return (str);
 	}
-	while (s2[k])
-	{
-		p[i++] = s2[k++];
-	}
-	p[i] = '\0';
-	return (p);
+	return (NULL);
 }

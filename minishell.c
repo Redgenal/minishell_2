@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/22 16:29:02 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:31:21 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	minishell(char **env)
 	char	*str;
 	int		pre;
 
+	str = NULL;
 	while (1)
 	{
 		pre = 0;

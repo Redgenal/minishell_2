@@ -10,7 +10,7 @@ NAME 	= minishell
 
 LIB		= libft/libft.a
 
-FLAGS 	=  -Werror -Wextra -Wall -I $(HEADER)
+FLAGS 	=  -Werror -Wextra -Wall  -I $(HEADER)
 
 .PHONY	: all clean fclean re
 

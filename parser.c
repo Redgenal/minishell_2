@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/24 18:26:51 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:02:29 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_full_str(char *str, int *i)
 		(*i)++;
 	}
 	tmp = ft_substr(str, j, *i - j);
-	tmp[*i - j + 1] = '\0';
+//	!!!tmp[*i - j + 1] = '\0';
 	return (tmp);
 }
 
@@ -71,7 +71,7 @@ void	get_list_str(char *str, char **env)
 	i = 0;
 	j = 0;
 	count_pipe = ft_count_of_pipes(str);
-	param = (char **) malloc (sizeof(char *) * (count_pipe + 2));
+	param = (char **) malloc (sizeof(char *) * (count_pipe + 1));
 	while (str[i] && j < (count_pipe + 1))
 	{
 		param[j] = get_full_str(str, &i);
@@ -89,11 +89,11 @@ void	get_list_str(char *str, char **env)
 			if (param[i][j] == '\\')
 				param[i] = ft_slesh(param[i], &j);
 			if (param[i][j] == '\\' )
-				param[i] = ft_drop_slesh(param[i], &j, env);
+				param[i] = ft_drop_slesh(param[i], &j);
 			if (param[i][j] == '$')
 				param[i] = ft_dollar(param[i], &j, env);
 			if (param[i][j] == '\"')
-				param[i] = d_quote(param[i], &j);
+				param[i] = d_quote(param[i], &j, env);
 			if (param[i][j] == '\'')
 				param[i] = s_quote(param[i], &j);
 

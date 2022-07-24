@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 04:57:54 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/22 15:39:22 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 20:29:02 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_mini_slesh(char *str, int *i)
 	return (tmp);
 }
 
-char	*ft_drop_slesh(char *str, int *i, char **env)
+char	*ft_drop_slesh(char *str, int *i)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -72,7 +72,6 @@ char	*ft_drop_slesh(char *str, int *i, char **env)
 	if (str[j] == '\'' || str[j] == '\"' || str[j] == '$')
 	{
 		tmp = ft_substr(str, 0, *i + count / 2);
-		tmp1 = ft_dollar(str, i, env);
 		tmp1 = ft_substr(str, j, strlen(str) - j);
 		tmp = ft_strjoin(tmp, tmp1);
 		free (tmp1);

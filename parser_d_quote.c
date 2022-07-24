@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:56:26 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/24 18:39:01 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:43:54 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ char	*ft_d_slesh(char *str, int *i)
 	return (str);
 }
 
-char	*d_quote(char *str, int *i)
+char	*d_quote(char *str, int *i, char **env)
 {
 	int		j;
+	int		len;
 	char	*tmp;
 	char	*tmp1;
 	char	*tmp2;
@@ -95,21 +96,40 @@ char	*d_quote(char *str, int *i)
 			str = ft_d_slesh(str, i);
 		if (str[*i] == '\\' )
 			str = ft_d_drop_slesh(str, i);
+		if (str[*i] == '$' )
+		{
+			len = ft_strlen(str);
+			str = ft_dollar(str, i, env);
+			*i = len - ft_strlen(str);
+			printf("TMP_final_char_in_q! = %c\n", str[*i]);
+		}
 		if (str[*i] == '\"')
 			break ;
 	}
 	tmp = ft_substr(str, 0, j);
-//	printf("TMP = %s\n", tmp);
+ printf("TMP = %s\n", tmp);
 	tmp1 = ft_substr(str, j + 1, *i - j - 1);
 	tmp2 = ft_strdup (str + *i + 1);
-//    printf("TMP1 = %s\n", tmp1);
-	tmp = ft_strjoin(tmp, tmp1);
-	tmp = ft_strjoin(tmp, tmp2);
+    printf("TMP1 = %s\n", tmp1);
+	printf("TMP2 = %s\n", tmp2);
+	if (tmp1 && tmp)
+	{
+		tmp1 = ft_strjoin(tmp, tmp1);
+		free(tmp);
+	}
+	printf("TMP! = %s\n\n", tmp1);
+	if (tmp1 && tmp2)
+	{
+
+	printf("TMP111! = %s\n\n", tmp1);
+		printf("TMP222! = %s\n\n", tmp2);
+		tmp2 = ft_strjoin(tmp1, tmp2);
+		free(tmp1);
+	}
+	printf("TMP = %s\n\n", tmp2);
 	(*i) -= 2;
-	free(tmp1);
-	free(tmp2);
 	free(str);
-	return (tmp);
+	return (tmp2);
 }
 
 
