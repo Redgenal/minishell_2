@@ -54,39 +54,69 @@ int	ft_for_buildins(char *com, t_list **env, char **arg)
 		return (666);
 }
 
-// pid_t	ft_circle_function(int **pipes, int count, p_list, char **envp)
-// {
-// 	int		i;
-// 	pid_t	pid;
+t_list	*ft_create_env(char **envp)
+{
+	t_list	*env;
+	t_list	*list;
+	int		i;
 
-// 	i = -1;
-// 	count -= 1;
-// 	while (++i <= count)
-// 	{
-// 		if (i < count)
-// 			pipe(pipes[i]);
-// 		if (i > 0)
-// 			close(pipes[i - 1][1]);
-// 		pid = fork();
-// 		if (pid < 0)
-// 			ft_call_exit("Error");
-// 		else if (pid == 0)
-// 		{
-// 			if (i < count)
-// 				count -= ft_choose_child(pipes, strs, envp, i);
-// 			else
-// 				ft_choose_last_child(pipes, strs, envp, i);
-// 		}
-// 		if (i > 0)
-// 			close(pipes[i - 1][0]);
-// 	}
-// 	return (pid);
-// }
+	i = -1;
+	while (envp[++i] != NULL)
+	{
+		list = ft_lstnew(envp[i]);
+		ft_lstadd_back(&env, list);
+	}
+	list = ft_lstnew(NULL);
+	ft_lstadd_back(&env, list);
+	return (env);
+}
+
+void	ft_circle_pipes_redir(int **pipes, int i)
+{
+	int	d1;
+	int	d2;
+
+	d1 = dup2(pipes[i - 1][0], 0);
+	if (d1 == -1)
+		ft_call_exit("dup error");
+	close(pipes[i - 1][0]);
+	d2 = dup2(pipes[i][1], 1);
+	if (d2 == -1)
+		ft_call_exit("dup error");
+	close(pipes[i][1]);
+}
+
+void	ft_pipe_redir(int i, int **pipes, t_lis *p_one, int out)
+{
+	int	d1;
+	int	d2;
+
+	if (i < (ft_liss_len(p_one) - 1))
+		pipe(pipes[i]);
+	if (i == 0)
+	{
+		d2 = dup2(pipes[i][1], STDOUT_FILENO);
+		if (d2 == -1)
+			ft_call_exit("dup error");
+		close(pipes[i][1]);
+	}
+	else if (i == (ft_liss_len(p_one) - 1))
+	{
+		d1 = dup2(pipes[i - 1][0], STDIN_FILENO);
+		if (d1 == -1)
+			ft_call_exit("dup2 error");
+		close(pipes[i - 1][0]);
+		d2 = dup2(out, 1);
+		if (d2 == -1)
+			ft_call_exit("dup error");
+	}
+	else
+		ft_circle_pipes_redir(pipes, i);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_list	*env;
-	t_list	*list;
 	int		i;
 	char	**my_env;
 	int		**pipes;
@@ -94,8 +124,10 @@ int	main(int argc, char **argv, char **envp)
 	// pid_t	pid;
 	t_lis	*p_list;
 	t_lis	*p_one;
-	int		d1;
-	int		d2;
+	int		out;
+	int		in;
+	// int d1;
+	// int d2;
 
 	env = NULL;
 	pipes = NULL;
@@ -112,10 +144,11 @@ int	main(int argc, char **argv, char **envp)
 	ft_strlcpy(p_list->args[1], argv[2], (ft_strlen(argv[2]) + 1));
 	p_list->args[2] = NULL;
 	p_list->redir = NULL;
-	p_list->next = NULL;
+	// p_list->next = NULL;
 	// p_list->redir = (t_redir *) malloc(sizeof(*p_list->redir));
 	// p_list->redir->file = "2.txt";
 	// p_list->redir->type = 1;
+	// p_list->redir->next = NULL;
 	// p_list->redir->next = (t_redir *) malloc(sizeof(*p_list->redir));
 	// p_list->redir->next->file = "4.txt";
 	// p_list->redir->next->type = 1;
@@ -130,13 +163,7 @@ int	main(int argc, char **argv, char **envp)
 	p_list->next->args[2] = NULL;
 	p_list->next->next = NULL;
 	p_list->next->redir = NULL;
-	while (envp[++i] != NULL)
-	{
-		list = ft_lstnew(envp[i]);
-		ft_lstadd_back(&env, list);
-	}
-	list = ft_lstnew(NULL);
-	ft_lstadd_back(&env, list);
+	env = ft_create_env(envp);
 	my_env = ft_from_lists_to_str(env);
 	p_one = p_list;
 	if (p_list->next != NULL)
@@ -146,65 +173,21 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 	}
 	i = 0;
+	out = dup(STDOUT_FILENO);
+	in = dup(STDIN_FILENO);
 	while (p_list != NULL)
 	{
 		if (i <= (ft_liss_len(p_one) - 1))
-		{
-			if (i < (ft_liss_len(p_one) - 1))
-				pipe(pipes[i]);
-			if (i == 0)
-			{
-				d2 = dup2(pipes[i][1], 1);
-				if (!d1)
-					ft_call_exit("dup error");
-				close(pipes[i][0]);
-			}
-			else if (i == (ft_liss_len(p_one) - 1))
-			{
-				close(pipes[i - 1][1]);
-				d1 = dup2(pipes[i - 1][0], 0);
-				if (!d2)
-					ft_call_exit("dup error");
-				int fd;
-				fd = open(argv[5], O_CREAT | O_RDWR | O_TRUNC, 0777);
-				d1 = dup2(fd, STDOUT_FILENO);
-				if (!d2)
-					ft_call_exit("dup error");
-			}
-			else
-			{
-				d1 = dup2(pipes[i - 1][0], 0);
-				if (d1 == -1)
-					ft_call_exit("dup error");
-				d2 = dup2(pipes[i][1], 1);
-				if (d2 == -1)
-					ft_call_exit("dup error");
-				close(pipes[i - 1][1]);
-				close(pipes[i - 1][0]);
-				close(pipes[i][0]);
-				close(pipes[i][1]);
-			}
-		}
+			ft_pipe_redir(i, pipes, p_one, out);
 		if (p_list->redir != NULL)
 			status = ft_dup_call(p_list, &env, my_env);
 		else
 			status = ft_do_ur_job(p_list, &env, my_env);
-		
 		i++;
 		p_list = p_list->next;
 	}
 	// waitpid(pid, &status, 0);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(p_one));
-	// else
-	// {
-	// 	pipes = ft_create_pipes(ft_lists_len(p_list));
-	// 	if (!pipes)
-	// 		return (1);
-	// 	pid = ft_circle_function(pipes, ft_lists_len(p_list), p_list, my_env);
-	// 	ft_close_all(pipes, ft_lists_len(p_list));
-	// 	waitpid(pid, &status, 0);
-	// 	ft_free_all(pipes, ft_lists_len(p_list));
-	// }
 	return (WEXITSTATUS(status));
 }

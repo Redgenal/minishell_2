@@ -30,7 +30,6 @@ int	ft_lets_dup(t_lis *p_list, int fd)
 			return (ft_call_file_not_found(p_list->redir->file));
 		close(fd);
 	}
-	
 	return (d1);
 }
 
