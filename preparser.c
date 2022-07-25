@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:28:49 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/20 17:50:37 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:58:29 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	pre_start(char *str, int i, int len)
 	{
 		if (str[i + 2] != '\0' && str[i + 2] == '<' && drop_space(str, 3) \
 				&& str[i + 3] != '\0' && str[i + 3] != '<')
-			return (1);
+			printf("Syntax error near unexpected token '<<<'\n");
 		else if (str[i + 2] == '<' && str[i + 3] == '<' && str[i + 4] == '<')
 			printf("Syntax error near unexpected token '<<'\n");
 		else if (str[i + 2] == '<' && str[i + 3] == '<')
 			printf("Syntax error near unexpected token '<'\n");
 		else if (len >= 3 && drop_space(str, 2) && str[i + 2] != '<')
-			printf("Multi-line comment processing missing\n");
+			return (0);
 		else
 			printf("Syntax error near unexpected token 'newline'\n");
 		return (1);

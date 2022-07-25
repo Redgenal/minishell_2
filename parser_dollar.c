@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:59:21 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/24 22:15:53 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:51:15 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,62 @@ char	*ft_dollar(char *str, int *i, char **env)
 	j = *i;
 	flag = 0;
 	tmp = ft_substr(str, 0, j);
-	printf("TMP! = %s\n", tmp);
+//	printf("TMP! = %s\n", tmp);
 	tmp1 = ft_get_dollar(str, &j, env, &flag);
-	printf("TMP_1! = %s\n", tmp1);
+//	printf("TMP_1! = %s\n", tmp1);
 	tmp2 = ft_strdup(str + *i + ft_strlen(ft_get_env_name(str, i)) + 1);
-	printf("TMP_2! = %s\n", tmp2);
+//	printf("TMP_2! = %s\n", tmp2);
 	if (flag == 1)
 		tmp = ft_strjoin(tmp, tmp1);
 	tmp = ft_strjoin(tmp, tmp2);
-	printf("TMP_final! = %s\n", tmp);
-	printf("TMP_final_char! = %c\n", tmp[*i]);
+//	printf("TMP_final! = %s\n", tmp);
+//	printf("TMP_final_char! = %c\n", tmp[*i]);
 	free (tmp1);
 	free (tmp2);
+	free (str);
+	return (tmp);
+}
+
+char	*ft_split_dollar(char *str, int *i, char **env)
+{
+	int		j;
+	int		flag;
+	char	*tmp;
+	char	*tmp1;
+	char	*tmp2;
+	char	**tmp3;
+
+	j = *i;
+	flag = 0;
+	tmp = ft_substr(str, 0, j);
+//	printf("TMP! = %s\n", tmp);
+	tmp1 = ft_get_dollar(str, &j, env, &flag);
+//	printf("TMP_1! = %s\n", tmp1);
+	tmp2 = ft_strdup(str + *i + ft_strlen(ft_get_env_name(str, i)) + 1);
+//	printf("TMP_2! = %s\n", tmp2);
+	if (flag == 1)
+		tmp = ft_strjoin(tmp, tmp1);
+	tmp = ft_strjoin(tmp, tmp2);
+//	printf("TMP_final! = %s\n", tmp);
+//	printf("TMP_final_char! = %c\n", tmp[*i]);
+	printf("!!!!\n");
+	tmp3 = ft_split(tmp, ' ');
+	tmp = ft_substr(str, 0, 0);
+	j = 0;
+	while (tmp3[j])
+	{
+		tmp = ft_strjoin(tmp, tmp3[j]);
+		tmp = ft_strjoin(tmp, " ");
+		j++;
+	}
+	while (j >= 0)
+	{
+		free(tmp3[j]);
+		j--;
+	}
+	free (tmp1);
+	free (tmp2);
+	free(tmp3);
 	free (str);
 	return (tmp);
 }
