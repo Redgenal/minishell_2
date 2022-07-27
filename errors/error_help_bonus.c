@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../headers/minishell.h"
 
 void	ft_call_exit(char *str)
 {

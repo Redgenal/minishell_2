@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "headers/minishell.h"
 
 int	ft_do_ur_job(t_lis *p_list, t_list **env, char **my_env)
 {

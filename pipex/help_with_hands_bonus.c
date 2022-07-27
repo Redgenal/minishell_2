@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "headers/pipex_bonus.h"
 
 int	ft_here_doc(char *stop)
 {

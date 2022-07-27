@@ -8,7 +8,7 @@ SOURCES	= mainfile.c buildins/ft_cd.c buildins/ft_echo.c buildins/ft_env.c \
 		
 OBJECTS	= $(SOURCES:%.c=%.o)
 
-HEADER	= minishell.h
+HEADER	= headers
 
 NAME 	= minishell
 

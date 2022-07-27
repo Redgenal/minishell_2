@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../headers/minishell.h"
 
 int	ft_ret_cd_code(int value, char *str)
 {

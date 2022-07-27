@@ -10,13 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../headers/minishell.h"
 
 int	ft_env(t_list *env)
 {
-	int	i;
-
-	i = -1;
 	while (env->next != NULL)
 	{
 		printf("%s\n", env->content);

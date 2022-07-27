@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "headers/minishell.h"
 
 int	ft_lets_dup(t_lis *p_list, int fd)
 {
@@ -97,6 +97,8 @@ int	ft_dup_call(t_lis *p_list, t_list **env, char **my_env)
 		if (fd < 0)
 			return (fd * -1);
 		d1 = ft_lets_dup(p_list, fd);
+		if (d1 == -127)
+			return (d1 * (-1));
 		p_list->redir = p_list->redir->next;
 	}
 	return (ft_do_ur_job(p_list, env, my_env));

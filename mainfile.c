@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "headers/minishell.h"
 
 pid_t	ft_obrabotka(char **str, char **envp)
 {
@@ -125,7 +125,7 @@ int	main(int argc, char **argv, char **envp)
 	t_lis	*p_list;
 	t_lis	*p_one;
 	int		out;
-	int		in;
+	// int		in;
 	// int d1;
 	// int d2;
 
@@ -174,7 +174,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	i = 0;
 	out = dup(STDOUT_FILENO);
-	in = dup(STDIN_FILENO);
+	// in = dup(STDIN_FILENO);
 	while (p_list != NULL)
 	{
 		if (i <= (ft_liss_len(p_one) - 1))
@@ -189,5 +189,5 @@ int	main(int argc, char **argv, char **envp)
 	// waitpid(pid, &status, 0);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(p_one));
-	return (WEXITSTATUS(status));
+	return (status);
 }

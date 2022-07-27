@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../headers/minishell.h"
 
 int	ft_ret_code(int value, char *str)
 {
@@ -29,10 +29,8 @@ int	ft_ret_code(int value, char *str)
 
 int	ft_no_arg(t_list *env)
 {
-	int		i;
 	char	**parse;
 
-	i = -1;
 	while (env->next)
 	{
 		if (env->content)
