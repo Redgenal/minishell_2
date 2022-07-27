@@ -61,6 +61,7 @@ t_list	*ft_create_env(char **envp)
 	int		i;
 
 	i = -1;
+	env = NULL;
 	while (envp[++i] != NULL)
 	{
 		list = ft_lstnew(envp[i]);
@@ -121,11 +122,10 @@ int	main(int argc, char **argv, char **envp)
 	char	**my_env;
 	int		**pipes;
 	int		status;
-	// pid_t	pid;
+	pid_t	pid;
 	t_lis	*p_list;
 	t_lis	*p_one;
-	int		out;
-	// int		in;
+	t_main	*main_struct;
 	// int d1;
 	// int d2;
 
@@ -163,6 +163,11 @@ int	main(int argc, char **argv, char **envp)
 	p_list->next->args[2] = NULL;
 	p_list->next->next = NULL;
 	p_list->next->redir = NULL;
+	main_struct = (t_main *) malloc (sizeof(*main_struct));
+	main_struct->p_list = p_list;
+	main_struct->out = dup(STDOUT_FILENO);
+	main_struct->in = dup(STDIN_FILENO);
+	main_struct->status = 0;
 	env = ft_create_env(envp);
 	my_env = ft_from_lists_to_str(env);
 	p_one = p_list;
@@ -171,23 +176,25 @@ int	main(int argc, char **argv, char **envp)
 		pipes = ft_create_pipes(ft_liss_len(p_list));
 		if (!pipes)
 			return (1);
-	}
-	i = 0;
-	out = dup(STDOUT_FILENO);
-	// in = dup(STDIN_FILENO);
-	while (p_list != NULL)
-	{
-		if (i <= (ft_liss_len(p_one) - 1))
-			ft_pipe_redir(i, pipes, p_one, out);
-		if (p_list->redir != NULL)
-			status = ft_dup_call(p_list, &env, my_env);
-		else
-			status = ft_do_ur_job(p_list, &env, my_env);
-		i++;
 		p_list = p_list->next;
 	}
-	// waitpid(pid, &status, 0);
+	i = 0;
+	while (main_struct->p_list != NULL)
+	{
+		if (i <= (ft_liss_len(p_one) - 1))
+			ft_pipe_redir(i, pipes, p_one, main_struct->out);
+		if (p_list->redir != NULL)
+			pid = ft_dup_call(main_struct, &env, my_env);
+		else
+			pid = ft_do_ur_job(main_struct, &env, my_env);
+		i++;
+		main_struct->p_list = main_struct->p_list->next;
+	}
+	waitpid(pid, &status, 0);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(p_one));
-	return (status);
+	if (pid)
+		return (WEXITSTATUS(status));
+	else
+		return (main_struct->status);
 }

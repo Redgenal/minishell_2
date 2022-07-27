@@ -12,12 +12,9 @@
 
 #include "headers/minishell.h"
 
-int	ft_do_ur_job(t_lis *p_list, t_list **env, char **my_env)
+int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
 {
-	int	status;
-
-	if (ft_for_buildins(p_list->args[0], env, p_list->args) == 666)
-		ft_obrabotka(p_list->args, my_env);
-	return (WEXITSTATUS(status));
+	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
+		return (ft_obrabotka(m_s->p_list->args, my_env));
+	return (m_s->status);
 }
-

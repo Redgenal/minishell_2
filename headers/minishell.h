@@ -32,6 +32,14 @@ typedef struct s_lis
 	t_redir			*redir;
 }	t_lis;
 
+typedef struct s_main
+{
+	int		in;
+	int		out;
+	t_lis	*p_list;
+	int		status;
+}	t_main;
+
 int		ft_env(t_list *env);
 int		ft_export(t_list **env, char *str);
 int		ft_pwd(void);
@@ -40,17 +48,17 @@ int		ft_echo(char *str, char *flag);
 int		ft_unset(char *str, t_list **env);
 int		ft_exit(char *str, char **strs);
 
-int		ft_call_file_not_found(char *str);
-int		ft_is_a_dire(char *str);
-int		ft_perm_denied(char *str);
+int		ft_call_file_not_found(t_main *m_s, char *str);
+int		ft_is_a_dire(t_main *m_s, char *str);
+int		ft_perm_denied(t_main *m_s, char *str);
 
 int		ft_here_doc(char *stop);
 int		ft_lists_len(t_list *env);
 int		ft_liss_len(t_lis *env);
 
-int		ft_dup_call(t_lis *p_list, t_list **env, char **my_env);
+int		ft_dup_call(t_main *m_s, t_list **env, char **my_env);
 int		ft_for_buildins(char *com, t_list **env, char **arg);
-int		ft_do_ur_job(t_lis *p_list, t_list **env, char **my_env);
+int		ft_do_ur_job(t_main *m_s, t_list **env, char **my_env);
 
 char	**ft_from_lists_to_str(t_list *env);
 
