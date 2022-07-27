@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/25 19:15:25 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:44:24 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+# include "../libft/headers/libft.h"
 
-void	rl_replace_line(char *c, int i);
+//void	rl_replace_line(char *c, int i);
 int		minishell(char **env);
 void	sig_int(int sig);
 int		ft_prepars(char *str);

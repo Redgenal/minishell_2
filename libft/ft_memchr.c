@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:04:51 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/12 19:50:43 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:48:30 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

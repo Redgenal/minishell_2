@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 12:30:59 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/12 20:00:18 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:47:17 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 static long	ft_drop(char *p)
 {

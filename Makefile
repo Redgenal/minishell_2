@@ -4,7 +4,7 @@ SOURCES	= minishell.c preparser.c preparser_utils.c preparser_two.c preparser_th
 
 OBJECTS	= $(SOURCES:%.c=%.o)
 
-HEADER	= minishell.h
+HEADER	= headers
 
 NAME 	= minishell
 

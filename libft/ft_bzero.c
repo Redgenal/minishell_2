@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 12:55:49 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 15:27:29 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:47:18 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

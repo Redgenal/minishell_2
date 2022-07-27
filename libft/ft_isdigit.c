@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 12:57:42 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/11 12:57:47 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:47:32 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 int	ft_isdigit(int c)
 {

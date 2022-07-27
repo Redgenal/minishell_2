@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:54:05 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/11 13:56:15 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:50:03 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 int	ft_tolower(int c)
 {

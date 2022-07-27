@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:44:38 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/24 22:54:48 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:28 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 #include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)

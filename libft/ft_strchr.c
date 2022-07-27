@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:29:34 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/12 19:55:31 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:18 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 16:49:10 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 13:15:49 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:47:57 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

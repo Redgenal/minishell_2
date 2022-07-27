@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 12:59:02 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/11 18:47:18 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:47:51 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 static int	ft_order(int n)
 {

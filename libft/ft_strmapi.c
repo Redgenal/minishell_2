@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:49:28 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/11 15:17:07 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:42 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

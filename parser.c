@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/25 19:13:51 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:31:37 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ void	get_list_str(char *str, char **env)
 
 int	ft_parser(char *str, char **env)
 {
-	int	i;
-	int	count_pipe;
+//	int	i;
+//	int	count_pipe;
 
-	i = 0;
-	count_pipe = ft_count_of_pipes(str);
+//	i = 0;
+//	count_pipe = ft_count_of_pipes(str);
 	get_list_str(str, env);
 	// while (str[i])
 	// {

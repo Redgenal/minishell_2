@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 16:49:35 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 13:01:28 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:48:27 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 int	ft_lstsize(t_list *lst)
 {

@@ -8,26 +8,26 @@ OBJECTS = $(SOURCES:%.c=%.o)
 
 OBJECTS_B = $(SOURCES_B:%.c=%.o)
 
-HEADER = libft.h
+HEADER = headers
 
 NAME = libft.a
 
-CFLAGS = -Wall -Werror -Wextra -I$(HEADER)
+CFLAGS = -Wall -Werror -Wextra -I $(HEADER)
 
 .PHONY: all clean fclean re bonus
 
 all	: $(NAME)
 
-$(NAME)	: $(OBJECTS) $(HEADER)
+$(NAME)	: $(OBJECTS) $(HEADER)/*.h
 	ar rcs $(NAME) $?
 
 %.o	: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus	: $(OBJECTS_B) $(HEADER)
+bonus	: $(OBJECTS_B) $(HEADER)/*.h
 	ar rcs $(NAME) $?
 
-%.o	: %.c $(HEADER)
+%.o	: %.c $(HEADER)/*.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean	:

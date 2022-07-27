@@ -6,11 +6,11 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:47 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 15:12:10 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:35 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/libft.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
