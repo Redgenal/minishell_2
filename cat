@@ -1,0 +1,16 @@
+Makefile
+cat
+headers
+libft
+ls
+minishell.c
+minishell_utils.c
+parser.c
+parser_d_quote.c
+parser_dollar.c
+parser_utils.c
+preparser.c
+preparser_three.c
+preparser_two.c
+preparser_utils.c
+stop

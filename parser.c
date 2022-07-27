@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/27 17:31:37 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:11:07 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,40 @@ char	*get_full_str(char *str, int *i)
 // {
 	
 // }
+void	get_list_words (char *str)
+// {
+// 	int		i;
+// 	char	**list_redir_one;
+// 	char	**list_redir_two;
 
-void	get_list_str(char *str, char **env)
+// 	i = 0;
+// 	list_redir_one = ft_split(str, '<');
+// 	list_redir_two = ft_split(str, '>');
+// 	while (list_redir_one[i])
+// 	{
+// 		printf("str = %s\n", list_redir_one[i]);
+// 		i++;
+// 	}
+
+
+//podumat' nujno li schitati' kol-vo slov dla vdelenia pamati
+}
+
+char	**get_list_str(char *str)
 {
 	int		i;
 	int		j;
 	int		count_pipe;
 	char	**param;
-	
+
+	if (!str)
+		return (0);
 	i = 0;
 	j = 0;
 	count_pipe = ft_count_of_pipes(str);
-	param = (char **) malloc (sizeof(char *) * (count_pipe + 1));
+	param = (char **) malloc (sizeof(char *) * (count_pipe + 2));
+	if (!param)
+		return (0);
 	while (str[i] && j < (count_pipe + 1))
 	{
 		param[j] = get_full_str(str, &i);
@@ -79,46 +101,62 @@ void	get_list_str(char *str, char **env)
 		j++;
 	}
 	param[j] = NULL;
-	i = 0;
-	j = 0;
-	while (i < count_pipe + 1)
-	{
-	 	j = 0;
-	 	while (param[i] != NULL && param[i][j] != '\0')
-	 	{
-//			printf("start_symb = %c\n", param[i][j]);
-			if (param[i][j] == '\"')
-				param[i] = d_quote(param[i], &j, env);
-			if (param[i][j] == '\'')
-				param[i] = s_quote(param[i], &j);
-			if (param[i][j] == '$')
-				param[i] = ft_split_dollar(param[i], &j, env);
-			if (param[i][j] == '\\')
-				param[i] = ft_slesh(param[i], &j);
-			if (param[i][j] == '\\' )
-				param[i] = ft_drop_slesh(param[i], &j);
-			if (param[i][j])
-	 			j++;
-	 	}
-	 	i ++;
-	}
-	i = 0;
-	while (param[i])
-	{
-		printf("str = %s\n", param[i]);
-		i++;
-	}
+	return (param);
+// 	i = 0;
+// 	j = 0;
+// 	while (i < count_pipe + 1)
+// 	{
+// 	 	j = 0;
+// 	 	while (param[i] != NULL && param[i][j] != '\0')
+// 	 	{
+// //			printf("start_symb = %c\n", param[i][j]);
+// 			if (param[i][j] == '\"')
+// 				param[i] = d_quote(param[i], &j, env);
+// 			if (param[i][j] == '\'')
+// 				param[i] = s_quote(param[i], &j);
+// 			if (param[i][j] == '$')
+// 				param[i] = ft_split_dollar(param[i], &j, env);
+// 			if (param[i][j] == '\\')
+// 				param[i] = ft_slesh(param[i], &j);
+// 			if (param[i][j] == '\\' )
+// 				param[i] = ft_drop_slesh(param[i], &j);
+// 			if (param[i][j])
+// 	 			j++;
+// 	 	}
+// 	 	i ++;
+// 	}
+// 	i = 0;
+// 	while (param[i])
+// 	{
+// 		printf("str = %s\n", param[i]);
+// 		i++;
+// 	}
 //	ft_parse_str(param);
 }
 
 int	ft_parser(char *str, char **env)
 {
-//	int	i;
+	int		i;
+	char	**pipes_strs;
 //	int	count_pipe;
 
 //	i = 0;
 //	count_pipe = ft_count_of_pipes(str);
-	get_list_str(str, env);
+	pipes_strs = get_list_str(str);
+	i = 0;
+	(void)env;
+	while (pipes_strs[i])
+	{
+		printf("pip_str = %s\n",pipes_strs[i]);
+		i++;
+	}
+	i = 0;
+	while (pipes_strs[i])
+	{
+		get_list_words(pipes_strs[i]);
+		i++;
+	}
+
 	// while (str[i])
 	// {
 	// 	if (str[i] == '\'')
