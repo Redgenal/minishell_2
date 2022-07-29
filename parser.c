@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/27 21:11:07 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:59:59 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	ft_count_of_pipes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		//pre_o_quote(str, &i, &o_flag);
-		//pre_d_quote(str, &i, &d_flag);
 		if (o_flag < 0 && d_flag < 0 && str[i] == '|')
 			count ++;
 		i++;
@@ -47,36 +45,91 @@ char	*get_full_str(char *str, int *i)
 	j = *i;
 	while (str[*i] && str[*i] != '|')
 	{
-		 pre_o_quote(str, i, &o_flag);
-		 pre_d_quote(str, i, &d_flag);
+		pre_o_quote(str, i, &o_flag);
+		pre_d_quote(str, i, &d_flag);
 		(*i)++;
 	}
 	tmp = ft_substr(str, j, *i - j);
-//	!!!tmp[*i - j + 1] = '\0';
 	return (tmp);
 }
 
-// void ft_parse_str(char **param)
-// {
+int	count_d_quote(char *str, int i)
+{
+	while (str[i] && str[i] != '\"')
+	{
+		if (str[i] != '\"')
+			i++;
+		if (str[i] == '\"' && !ft_count_slesh(str, i))
+			i++;
+	}
+	return (i);
+}
+
+int	get_count_words(char *str)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i] && str[i] != '<' && str[i] != '>')
+		count++;
+	while (str[i])
+	{
+		if (str[i] == '\"' && ft_count_slesh(str, i))
+		{
+			i++;
+			i = count_d_quote(str, i);
+		}
+		if (str[i] == '\'' && ft_count_slesh(str, i))
+		{
+			i++;
+			while (str[i] && str[i] != '\'')
+				i++;
+		}
+		if (str[i] == '>' || str[i] == '<')
+		{
+			count++;
+			if (str[i + 1] == '>' || str[i + 1] == '<')
+				i++;
+			if (str[i + 1] != '\0' && str[i + 1] != ' ' && str[i + 1] != '\t')
+				count++;
+		}
+		if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\0' \
+			&& str[i + 1] != '>' && str[i + 1] != '<')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char	**get_list_words(char *str)
+{
+	// char	**result;
+	// int		i;
+	// int		j;
+	// int		start;
+
+	// if (!str)
+	// 	return (0);
+	// result = (char **) malloc(sizeof(char *) * (get_count_words(str) + 1));
+	// i = 0;
+	// j = 0;
+	// if (!result)
+	// 	return (0);
+	// while (str[i] && str[i] == ' ')
+	// 	i++;
+	// start = i;
+	// while (str[i])
+	// {
+	// 	if (str)
+	// 	result[j] = ft_substr(str, i, )
+	// }
 	
-// }
-void	get_list_words (char *str)
-// {
-// 	int		i;
-// 	char	**list_redir_one;
-// 	char	**list_redir_two;
-
-// 	i = 0;
-// 	list_redir_one = ft_split(str, '<');
-// 	list_redir_two = ft_split(str, '>');
-// 	while (list_redir_one[i])
-// 	{
-// 		printf("str = %s\n", list_redir_one[i]);
-// 		i++;
-// 	}
-
-
-//podumat' nujno li schitati' kol-vo slov dla vdelenia pamati
+    // // Дописать получение каждой строки
+	// return (result);
 }
 
 char	**get_list_str(char *str)
@@ -137,37 +190,33 @@ char	**get_list_str(char *str)
 int	ft_parser(char *str, char **env)
 {
 	int		i;
+	int 	j;
+	int		count_param;
 	char	**pipes_strs;
-//	int	count_pipe;
+	char	***blocks;
 
-//	i = 0;
-//	count_pipe = ft_count_of_pipes(str);
+	count_param = 0;
 	pipes_strs = get_list_str(str);
 	i = 0;
 	(void)env;
 	while (pipes_strs[i])
 	{
 		printf("pip_str = %s\n",pipes_strs[i]);
+		count_param++;
 		i++;
 	}
 	i = 0;
-	while (pipes_strs[i])
+	blocks = (char ***) malloc(sizeof(char **) * count_param);
+	while (i <= count_param)
 	{
-		get_list_words(pipes_strs[i]);
+		j = 0;
+		blocks[i] = get_list_words(pipes_strs[i]);
+		while (blocks[i][j])
+		{
+			printf("str = %s\n", blocks[i][j]);
+			j++;
+		}
 		i++;
 	}
-
-	// while (str[i])
-	// {
-	// 	if (str[i] == '\'')
-	// 		str = s_quote(str, &i);
-	// 	if (str[i] == '\\')
-	// 		str = ft_slesh(str, &i);
-	// 	if (str[i] == '\"')
-	// 		str = d_quote(str, &i);
-	// 	i++;
-	// }
-	// printf("\n\n\ncount pipes = %d\n", count_pipe);
-	// printf("%s\n", str);
 	return (0);
 }

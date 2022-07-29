@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/27 17:44:24 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:48:09 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ char	*ft_mini_slesh(char *str, int *i);
 char	*ft_dollar(char *str, int *i, char **env);
 char	*ft_get_dollar(char *str, int *i, char **env, int *flag);
 char	*ft_split_dollar(char *str, int *i, char **env);
+char	**ft_split_custom(char *s, char c);
+int		count_d_quote(char *str, int i);
 
 #endif

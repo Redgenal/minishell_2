@@ -3,6 +3,7 @@
         "history.h": "c",
         "libft.h": "c",
         "algorithm": "c",
-        "random": "c"
+        "random": "c",
+        "sstream": "c"
     }
 }
