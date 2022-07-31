@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:59:21 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/25 19:51:15 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:27:21 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*ft_split_dollar(char *str, int *i, char **env)
 	tmp = ft_strjoin(tmp, tmp2);
 //	printf("TMP_final! = %s\n", tmp);
 //	printf("TMP_final_char! = %c\n", tmp[*i]);
-	printf("!!!!\n");
+//	printf("!!!!\n");
 	tmp3 = ft_split(tmp, ' ');
 	tmp = ft_substr(str, 0, 0);
 	j = 0;

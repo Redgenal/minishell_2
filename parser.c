@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/29 20:59:59 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:30:40 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,29 +107,96 @@ int	get_count_words(char *str)
 
 char	**get_list_words(char *str)
 {
-	// char	**result;
-	// int		i;
-	// int		j;
-	// int		start;
+	char	**result;
+	int		i;
+	int		j;
+	int		start;
 
-	// if (!str)
-	// 	return (0);
-	// result = (char **) malloc(sizeof(char *) * (get_count_words(str) + 1));
-	// i = 0;
-	// j = 0;
-	// if (!result)
-	// 	return (0);
-	// while (str[i] && str[i] == ' ')
-	// 	i++;
-	// start = i;
-	// while (str[i])
+	if (!str)
+		return (0);
+	result = (char **) malloc(sizeof(char *) * (get_count_words(str) + 1));
+	if (!result)
+		return (0);
+	i = strlen(str);
+	while (i >= 0)
+	{
+		i--;
+		if (str[i] != ' ')
+			break ;
+		str[i] = '\0';
+	}
+//	printf ("count words = %d\n", get_count_words(str));
+	i = 0;
+	j = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	start = i;
+	while (str[i])
+	{
+		while (str[i] && str[i] == ' ')
+		{
+			if (i > 0 && str[i - 1] != ' ')
+				break ;
+			i++;
+			start = i;
+		}
+		if (str[i] == '<' || str[i] == '>')
+		{
+			if ((i > 0) && str[i - 1] != ' ')
+			{
+				result[j] = ft_substr(str, start, i - start);
+				j++;
+				start = i;
+			}
+			if (str[i + 1] == '<' || str[i + 1] == '>')
+			{
+				result[j] = ft_substr(str, start, 2);
+				j++;
+				i++;
+			}
+			else
+			{
+				result[j] = ft_substr(str, start, 1);
+				j++;
+			}
+			i++;
+			start = i;
+		}
+		if (str[i] == '\"' && ft_count_slesh(str, i))
+		{
+			i++;
+			i = count_d_quote(str, i);
+		}
+		if (str[i] == '\'' && ft_count_slesh(str, i))
+		{
+			i++;
+			while (str[i] && str[i] != '\'')
+				i++;
+		}
+		if (str[i] == ' ' && (i > 0) && str[i - 1] != '<' && str[i - 1] != '>')
+		{
+			result[j] = ft_substr(str, start, i - start + 1);
+			j++;
+			start = i + 1;
+		}
+		if (str[i] == ' ' && (i > 0) && (str[i - 1] == '<' \
+			|| str[i - 1] == '>'))
+			start++;
+		if (str[i + 1] == '\0' && str[i] != ' ')
+			result[j] = ft_substr(str, start, i - start + 1);
+		i++;
+
+	}
+	j++;
+	result[j] = NULL;
+	i = 0;
+	free (str);
+	// while (result[i])
 	// {
-	// 	if (str)
-	// 	result[j] = ft_substr(str, i, )
+	// 	printf("word = %s\n", result[i]);
+	// 	i++;
 	// }
-	
-    // // Дописать получение каждой строки
-	// return (result);
+	return (result);
 }
 
 char	**get_list_str(char *str)
@@ -187,10 +254,39 @@ char	**get_list_str(char *str)
 //	ft_parse_str(param);
 }
 
+char	*parse_word(char *param, char **env)
+{
+	int	j;
+
+	j = 0;
+	while (param[j] != '\0')
+	{
+		if (param[j] == '\"')
+			param = d_quote(param, &j, env);
+		if (param[j] == '\'')
+			param = s_quote(param, &j);
+		if (param[j] == '$')
+			param = ft_split_dollar(param, &j, env);
+		if (param[j] == '\\')
+			param = ft_slesh(param, &j);
+		if (param[j] == '\\' )
+			param = ft_drop_slesh(param, &j);
+		if (param[j])
+			j++;
+	}
+	// j = 0;
+	// while (param[j])
+	// {
+	// 	printf("str = %s\n", param);
+	// 	j++;
+	// }
+	return (param);
+}
+
 int	ft_parser(char *str, char **env)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		count_param;
 	char	**pipes_strs;
 	char	***blocks;
@@ -198,22 +294,22 @@ int	ft_parser(char *str, char **env)
 	count_param = 0;
 	pipes_strs = get_list_str(str);
 	i = 0;
-	(void)env;
 	while (pipes_strs[i])
 	{
-		printf("pip_str = %s\n",pipes_strs[i]);
+//		printf("pip_str = %s\n",pipes_strs[i]);
 		count_param++;
 		i++;
 	}
 	i = 0;
 	blocks = (char ***) malloc(sizeof(char **) * count_param);
-	while (i <= count_param)
+	while (i < count_param)
 	{
 		j = 0;
 		blocks[i] = get_list_words(pipes_strs[i]);
-		while (blocks[i][j])
+		while (blocks[i][j] != NULL)
 		{
-			printf("str = %s\n", blocks[i][j]);
+			blocks[i][j] = parse_word(blocks[i][j], env);
+			printf("str_block[%d] = %s\n", i, blocks[i][j]);
 			j++;
 		}
 		i++;
