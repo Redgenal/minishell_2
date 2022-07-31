@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/29 20:48:09 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:02:33 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/headers/libft.h"
+
+typedef struct s_redir
+{
+	int				type;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_lis
+{
+	char			**args;
+	struct s_lis	*next;
+	t_redir			*redir;
+}	t_lis;
 
 //void	rl_replace_line(char *c, int i);
 int		minishell(char **env);

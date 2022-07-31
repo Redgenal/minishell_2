@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:56:26 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/31 18:42:33 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:48:53 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*d_quote(char *str, int *i, char **env)
 	}
 //	printf("TMP = %s\n\n", tmp2);
 	(*i) -= 1;
-	if (tmp2[*i]== '\"')
+	if (tmp2[*i] == '\"')
 		(*i) -= 1;
 //	printf("TMP_c = %c\n\n", tmp2[*i]);
 	free(str);
