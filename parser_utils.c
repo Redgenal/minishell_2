@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 04:57:54 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/02 11:28:19 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:41:29 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,13 @@ char	*ft_drop_slesh(char *str, int *i)
 		{
 			free (str);
 			if (count % 2 == 0)
-				(*i) += count / 2;
+			{
+				(*i) += count / 2 - 1;
+			}
 			else
+			{
 				(*i) += (count / 2) + 1;
+			}
 			return (tmp);
 		}
 	}

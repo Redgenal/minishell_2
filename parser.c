@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/02 11:29:51 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:32:12 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ char	**get_list_str(char *str)
 		i++;
 		j++;
 	}
+//	free(str);
 	param[j] = NULL;
 	return (param);
 }
@@ -257,7 +258,7 @@ int	ft_parser(char *str, char **env)
 		i++;
 	}
 	i = 0;
-	blocks = (char ***) malloc(sizeof(char **) * count_param);
+	blocks = (char ***) malloc(sizeof(char **) * (count_param + 1));
 	while (i < count_param)
 	{
 		j = 0;
@@ -265,10 +266,12 @@ int	ft_parser(char *str, char **env)
 		while (blocks[i][j] != NULL)
 		{
 			blocks[i][j] = parse_word(blocks[i][j], env);
-			printf("str_block[%d] = %s\n", i, blocks[i][j]);
+//			printf("str_block[%d] = %s\n", i, blocks[i][j]);
 			j++;
 		}
 		i++;
 	}
+	blocks[i] = NULL;
+	test_print(blocks, count_param);
 	return (0);
 }
