@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/31 18:30:40 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/02 11:29:51 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ char	**get_list_words(char *str)
 			break ;
 		str[i] = '\0';
 	}
-//	printf ("count words = %d\n", get_count_words(str));
 	i = 0;
 	j = 0;
 	while (str[i] && str[i] == ' ')
@@ -185,17 +184,11 @@ char	**get_list_words(char *str)
 		if (str[i + 1] == '\0' && str[i] != ' ')
 			result[j] = ft_substr(str, start, i - start + 1);
 		i++;
-
 	}
 	j++;
 	result[j] = NULL;
 	i = 0;
 	free (str);
-	// while (result[i])
-	// {
-	// 	printf("word = %s\n", result[i]);
-	// 	i++;
-	// }
 	return (result);
 }
 
@@ -222,36 +215,6 @@ char	**get_list_str(char *str)
 	}
 	param[j] = NULL;
 	return (param);
-// 	i = 0;
-// 	j = 0;
-// 	while (i < count_pipe + 1)
-// 	{
-// 	 	j = 0;
-// 	 	while (param[i] != NULL && param[i][j] != '\0')
-// 	 	{
-// //			printf("start_symb = %c\n", param[i][j]);
-// 			if (param[i][j] == '\"')
-// 				param[i] = d_quote(param[i], &j, env);
-// 			if (param[i][j] == '\'')
-// 				param[i] = s_quote(param[i], &j);
-// 			if (param[i][j] == '$')
-// 				param[i] = ft_split_dollar(param[i], &j, env);
-// 			if (param[i][j] == '\\')
-// 				param[i] = ft_slesh(param[i], &j);
-// 			if (param[i][j] == '\\' )
-// 				param[i] = ft_drop_slesh(param[i], &j);
-// 			if (param[i][j])
-// 	 			j++;
-// 	 	}
-// 	 	i ++;
-// 	}
-// 	i = 0;
-// 	while (param[i])
-// 	{
-// 		printf("str = %s\n", param[i]);
-// 		i++;
-// 	}
-//	ft_parse_str(param);
 }
 
 char	*parse_word(char *param, char **env)
@@ -274,12 +237,6 @@ char	*parse_word(char *param, char **env)
 		if (param[j])
 			j++;
 	}
-	// j = 0;
-	// while (param[j])
-	// {
-	// 	printf("str = %s\n", param);
-	// 	j++;
-	// }
 	return (param);
 }
 
@@ -296,7 +253,6 @@ int	ft_parser(char *str, char **env)
 	i = 0;
 	while (pipes_strs[i])
 	{
-//		printf("pip_str = %s\n",pipes_strs[i]);
 		count_param++;
 		i++;
 	}
