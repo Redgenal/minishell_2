@@ -4,7 +4,9 @@
         "libft.h": "c",
         "algorithm": "c",
         "random": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "__locale": "c",
+        "functional": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/02 16:04:38 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:53:53 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ typedef struct s_lis
 	struct s_lis	*next;
 	t_redir			*redir;
 }	t_lis;
+
+typedef struct s_words
+{
+	char			**result;
+	int				i;
+	int				j;
+	int				start;
+}	t_words;
 
 //void	rl_replace_line(char *c, int i);
 int		minishell(char **env);
@@ -70,8 +78,25 @@ char	*ft_dollar(char *str, int *i, char **env);
 char	*ft_get_dollar(char *str, int *i, char **env, int *flag);
 char	*ft_split_dollar(char *str, int *i, char **env);
 char	**ft_split_custom(char *s, char c);
+char	*ft_get_env_name(char *str, int *i);
 int		count_d_quote(char *str, int i);
+int		find_end_slesh(char *str, int *j);
+int		get_count_words(char *str);
+char	**get_list_words(char *str);
+char	**get_list_str(char *str);
+char	*parse_word(char *param, char **env);
+char	*get_full_str(char *str, int *i);
+int		ft_count_of_pipes(char *str);
 
-void	test_print(char ***blocks, int count_blocks);
+t_redir	*get_list_redir(char **envp);
+t_redir	*ft_redirlast(t_redir *lst);
+t_redir	*ft_redirnew(void *type, void *content);
+void	ft_rediradd_back(t_redir **lst, t_redir *new);
+void	ft_lisadd_back(t_lis **lst, t_lis *new);
+t_lis	*ft_lislast(t_lis *lst);
+int		get_redir(char *str);
+int		count_args(char **words);
+char	**get_args(char **words);
+int		count_redir(char **words);
 
 #endif

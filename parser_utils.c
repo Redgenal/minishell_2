@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 04:57:54 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/02 12:41:29 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:49:55 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,7 @@ char	*ft_drop_slesh(char *str, int *i)
 	int		count;
 
 	j = *i;
-	count = 0;
-	tmp = NULL;
-	tmp1 = NULL;
-	while (str[j] == '\\')
-	{
-		count++;
-		j++;
-	}
+	count = find_end_slesh(str, &j);
 	if (str[j] == '\'' || str[j] == '\"' || str[j] == '$')
 	{
 		tmp = ft_substr(str, 0, *i + count / 2);
@@ -78,13 +71,9 @@ char	*ft_drop_slesh(char *str, int *i)
 		{
 			free (str);
 			if (count % 2 == 0)
-			{
 				(*i) += count / 2 - 1;
-			}
 			else
-			{
 				(*i) += (count / 2) + 1;
-			}
 			return (tmp);
 		}
 	}
@@ -115,14 +104,9 @@ char	*ft_slesh(char *str, int *i)
 	int		count;
 
 	j = *i;
-	count = 0;
+	count = find_end_slesh(str, &j);
 	tmp = NULL;
 	tmp1 = NULL;
-	while (str[j] == '\\')
-	{
-		count++;
-		j++;
-	}
 	if (count % 2 != 0)
 		count --;
 	if (str[j] != '\'' && str[j] != '\"' && str[j] != '$')
