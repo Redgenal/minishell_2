@@ -1,9 +1,9 @@
 CC	= gcc
 
-SOURCES	= mainfile.c buildins/ft_cd.c buildins/ft_echo.c buildins/ft_env.c \
+SOURCES	= exequte/mainfile.c buildins/ft_cd.c buildins/ft_echo.c buildins/ft_env.c \
 		buildins/ft_exit.c buildins/ft_export.c buildins/ft_pwd.c buildins/ft_unset.c \
-		help.c errors/error_help_bonus.c pipex/help_with_cmd_bonus.c pipex/get_next_line_bonus.c \
-		pipex/get_next_line_utils_bonus.c redir.c errors/errors_in_redir.c job.c \
+		exequte/help.c errors/error_help_bonus.c pipex/help_with_cmd_bonus.c pipex/get_next_line_bonus.c \
+		pipex/get_next_line_utils_bonus.c exequte/redir.c errors/errors_in_redir.c exequte/job.c \
 		pipex/dop_help_bonus.c
 		
 OBJECTS	= $(SOURCES:%.c=%.o)
