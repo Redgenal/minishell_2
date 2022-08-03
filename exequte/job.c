@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   job.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/11 13:13:08 by gantedil          #+#    #+#             */
-/*   Updated: 2021/10/13 13:17:30 by gantedil         ###   ########.fr       */
+/*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
+/*   Updated: 2022/07/24 18:18:37 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/minishell.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
+		return (ft_obrabotka(m_s->p_list->args, my_env));
+	return (m_s->status);
 }

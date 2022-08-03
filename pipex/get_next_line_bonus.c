@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "headers/pipex_bonus.h"
 
 char	*ft_newost(char *ost)
 {

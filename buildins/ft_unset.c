@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../headers/minishell.h"
 
 void	ft_remove(t_list **env)
 {
@@ -23,11 +23,9 @@ void	ft_remove(t_list **env)
 
 int	ft_unset(char *str, t_list **env)
 {
-	int		i;
 	int		flag;
 	t_list	*first;
 
-	i = -1;
 	flag = 0;
 	first = *env;
 	while ((*env)->next)
@@ -40,6 +38,7 @@ int	ft_unset(char *str, t_list **env)
 		}
 		(*env) = (*env)->next;
 	}
+	*env = first;
 	if (flag == 0)
 		perror("No such variable");
 	return (0);

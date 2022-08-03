@@ -23,7 +23,7 @@
 # include <stddef.h>
 # include <fcntl.h>
 # include <sys/stat.h>
-# include "../libft/libft.h"
+# include "../libft/headers/libft.h"
 
 char	**ft_find_path(char **envp);
 char	**ft_delenie_cmd(char *argv);
