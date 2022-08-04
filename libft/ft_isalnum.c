@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job.c                                              :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 18:48:39 by utawana          ###   ########.fr       */
+/*   Created: 2021/10/11 12:56:44 by gantedil          #+#    #+#             */
+/*   Updated: 2022/07/27 17:47:20 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "headers/libft.h"
 
-int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
+int	ft_isalnum(int c)
 {
-	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
-		return (ft_obrabotka(m_s->p_list->args, my_env));
-	return (m_s->status);
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }

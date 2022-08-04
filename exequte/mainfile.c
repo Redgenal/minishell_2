@@ -115,7 +115,7 @@ void	ft_pipe_redir(int i, int **pipes, t_lis *p_one, int out)
 		ft_circle_pipes_redir(pipes, i);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main_exe(t_lis *p_list, char **envp)
 {
 	t_list	*env;
 	int		i;
@@ -123,44 +123,11 @@ int	main(int argc, char **argv, char **envp)
 	int		**pipes;
 	int		status;
 	pid_t	pid;
-	t_lis	*p_list;
 	t_lis	*p_one;
 	t_main	*main_struct;
 
 	env = NULL;
 	pipes = NULL;
-	(void) argc;
-	(void) argv;
-	i = -1;
-	p_list = (t_lis *) malloc(sizeof(*p_list));
-	if (!p_list)
-		return (0);
-	p_list->args = malloc(sizeof(char *) * 3);
-	p_list->args[0] = malloc(sizeof(char) * (ft_strlen(argv[1]) + 1));
-	ft_strlcpy(p_list->args[0], argv[1], (ft_strlen(argv[1]) + 1));
-	p_list->args[1] = malloc(sizeof(char) * (ft_strlen(argv[2]) + 1));
-	ft_strlcpy(p_list->args[1], argv[2], (ft_strlen(argv[2]) + 1));
-	p_list->args[2] = NULL;
-	p_list->redir = NULL;
-	// p_list->next = NULL;
-	// p_list->redir = (t_redir *) malloc(sizeof(*p_list->redir));
-	// p_list->redir->file = "2.txt";
-	// p_list->redir->type = 1;
-	// p_list->redir->next = NULL;
-	// p_list->redir->next = (t_redir *) malloc(sizeof(*p_list->redir));
-	// p_list->redir->next->file = "4.txt";
-	// p_list->redir->next->type = 1;
-	// p_list->redir->next->next = NULL;
-	//
-	p_list->next = (t_lis *) malloc(sizeof(*p_list));
-	p_list->next->args = malloc(sizeof(char *) * 3);
-	p_list->next->args[0] = malloc(sizeof(char) * (ft_strlen(argv[3]) + 1));
-	ft_strlcpy(p_list->next->args[0], argv[3], (ft_strlen(argv[3]) + 1));
-	p_list->next->args[1] = malloc(sizeof(char) * (ft_strlen(argv[4]) + 1));
-	ft_strlcpy(p_list->next->args[1], argv[4], (ft_strlen(argv[4]) + 1));
-	p_list->next->args[2] = NULL;
-	p_list->next->next = NULL;
-	p_list->next->redir = NULL;
 	main_struct = (t_main *) malloc (sizeof(*main_struct));
 	main_struct->p_list = p_list;
 	main_struct->out = dup(STDOUT_FILENO);
@@ -179,9 +146,9 @@ int	main(int argc, char **argv, char **envp)
 	i = 0;
 	while (main_struct->p_list != NULL)
 	{
-		if (i <= (ft_liss_len(p_one) - 1))
+		if ((ft_liss_len(p_one) != 1) && (i <= (ft_liss_len(p_one) - 1)))
 			ft_pipe_redir(i, pipes, p_one, main_struct->out);
-		if (p_list->redir != NULL)
+		if (main_struct->p_list->redir != NULL)
 			pid = ft_dup_call(main_struct, &env, my_env);
 		else
 			pid = ft_do_ur_job(main_struct, &env, my_env);
@@ -189,6 +156,8 @@ int	main(int argc, char **argv, char **envp)
 		main_struct->p_list = main_struct->p_list->next;
 	}
 	waitpid(pid, &status, 0);
+	dup2(main_struct->in, 0);
+	dup2(main_struct->out, 1);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(p_one));
 	if (pid)

@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job.c                                              :+:      :+:    :+:   */
+/*   struct_utils_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 18:48:39 by utawana          ###   ########.fr       */
+/*   Created: 2022/08/03 19:45:49 by gantedil          #+#    #+#             */
+/*   Updated: 2022/08/04 20:22:53 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "minishell.h"
 
-int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
+t_redir	*get_list_redir(char **envp)
 {
-	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
-		return (ft_obrabotka(m_s->p_list->args, my_env));
-	return (m_s->status);
+	t_redir	*env;
+	t_redir	*list;
+	int		i;
+
+	i = -1;
+	env = NULL;
+	while (envp[++i] != NULL)
+	{
+		if (get_redir(envp[i]) != -1)
+		{
+			list = ft_redirnew(envp[i], envp[i + 1]);
+			ft_rediradd_back(&env, list);
+		}
+	}
+	if (env)
+	{
+		list = NULL;
+		ft_rediradd_back(&env, list);
+	}
+	return (env);
 }

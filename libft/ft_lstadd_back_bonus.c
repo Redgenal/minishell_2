@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job.c                                              :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 18:48:39 by utawana          ###   ########.fr       */
+/*   Created: 2021/10/12 16:51:22 by gantedil          #+#    #+#             */
+/*   Updated: 2022/07/27 17:47:42 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "headers/libft.h"
 
-int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
-		return (ft_obrabotka(m_s->p_list->args, my_env));
-	return (m_s->status);
+	t_list	*p;
+
+	if (lst)
+	{
+		if (*lst)
+		{
+			p = ft_lstlast(*(lst));
+			p->next = new;
+		}
+		else
+			*lst = new;
+	}
 }

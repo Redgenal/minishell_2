@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job.c                                              :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 18:48:39 by utawana          ###   ########.fr       */
+/*   Created: 2021/10/11 13:08:18 by gantedil          #+#    #+#             */
+/*   Updated: 2022/07/27 17:48:45 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "headers/libft.h"
 
-int	ft_do_ur_job(t_main *m_s, t_list **env, char **my_env)
+void	*ft_memset(void *str, int c, size_t len)
 {
-	if (ft_for_buildins(m_s->p_list->args[0], env, m_s->p_list->args) == 666)
-		return (ft_obrabotka(m_s->p_list->args, my_env));
-	return (m_s->status);
+	size_t	i;
+	char	*s;
+
+	i = 0;
+	s = (char *) str;
+	while (i < len)
+	{
+		s[i] = c;
+		i ++;
+	}
+	return (s);
 }

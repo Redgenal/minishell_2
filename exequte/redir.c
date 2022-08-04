@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:23:48 by utawana           #+#    #+#             */
-/*   Updated: 2022/07/22 20:23:50 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:31:30 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_lets_dup(t_main *m_s, int fd)
 {
 	int	d1;
 
-	if (m_s->p_list->redir->type == 0 || m_s->p_list->redir->type == 3)
+	if (m_s->p_list->redir->type == 1 || m_s->p_list->redir->type == 3)
 	{
 		d1 = dup2(fd, STDIN_FILENO);
 		if (d1 == -1)
@@ -39,7 +39,7 @@ int	ft_get_in_fd(t_main *m_s, t_lis *p_list)
 
 	if (opendir(p_list->redir->file))
 		return (ft_is_a_dire(m_s, p_list->redir->file));
-	if (p_list->redir->type == 0)
+	if (p_list->redir->type == 1)
 	{
 		fd = open(p_list->redir->file, O_RDWR, 0777);
 		if (access(p_list->redir->file, R_OK | W_OK))
@@ -58,7 +58,7 @@ int	ft_get_out_fd(t_main *m_s, t_lis *p_list)
 
 	if (opendir(p_list->redir->file))
 		return (ft_is_a_dire(m_s, p_list->redir->file));
-	if (p_list->redir->type == 1)
+	if (p_list->redir->type == 0)
 	{
 		fd = open(p_list->redir->file, O_CREAT | O_RDWR | O_TRUNC, 0777);
 		if (access(p_list->redir->file, R_OK | W_OK))
@@ -90,9 +90,9 @@ int	ft_dup_call(t_main *m_s, t_list **env, char **my_env)
 			ft_call_file_not_found(m_s, m_s->p_list->redir->file);
 			return (1);
 		}
-		if (m_s->p_list->redir->type == 1 || m_s->p_list->redir->type == 4)
+		if (m_s->p_list->redir->type == 0 || m_s->p_list->redir->type == 4)
 			fd = ft_get_out_fd(m_s, m_s->p_list);
-		if (m_s->p_list->redir->type == 0 || m_s->p_list->redir->type == 3)
+		if (m_s->p_list->redir->type == 1 || m_s->p_list->redir->type == 3)
 			fd = ft_get_in_fd(m_s, m_s->p_list);
 		if (fd < 0)
 			return (fd * -1);
