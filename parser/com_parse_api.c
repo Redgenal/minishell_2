@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 20:20:44 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/14 17:14:29 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void    blocks_free(char ***blocks, int i, int j)
     free(blocks);
 }
 
-int com_parser_api(char ***blocks, int count_blocks, char **env)
+int com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct)
 {
     t_lis   *lis;
 
     lis = create_list(blocks, count_blocks);
     if (count_blocks != 0)
-        return (main_exe(lis, env));
+        return (main_exe(lis, main_stuct));
     else
         return (0);
 }

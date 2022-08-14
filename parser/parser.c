@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/04 16:20:46 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/14 17:13:50 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	count_d_quote(char *str, int i)
 	return (i);
 }
 
-int	ft_parser(char *str, char **env)
+int	ft_parser(char *str, t_main *main_struct)
 {
 	int		i;
 	int		j;
@@ -88,11 +88,11 @@ int	ft_parser(char *str, char **env)
 		blocks[i] = get_list_words(pipes_strs[i]);
 		while (blocks[i][j])
 		{
-			blocks[i][j] = parse_word(blocks[i][j], env);
+			blocks[i][j] = parse_word(blocks[i][j], main_struct->my_env);
 			j++;
 		}
 	}
 	blocks[i] = NULL;
-	com_parser_api(blocks, i, env);
+	com_parser_api(blocks, i, main_struct);
 	return (0);
 }

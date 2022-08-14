@@ -30,8 +30,10 @@ int	ft_ret_code(int value, char *str)
 int	ft_no_arg(t_list *env)
 {
 	char	**parse;
+	int	i;
 
-	while (env->next)
+	i = 0;
+	while (env)
 	{
 		if (env->content)
 		{
@@ -41,7 +43,29 @@ int	ft_no_arg(t_list *env)
 			printf("declare -x %s=%c%s%c\n", parse[0], '"', parse[1], '"');
 			free(parse);
 		}
+		i++;
 		env = env->next;
+	}
+	printf("i = %d\n", i);
+	return (0);
+}
+
+int	ft_strncmp_ust(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (-1);
+	while (i < n)
+	{
+		if (!*(unsigned char *)(s1 + i) || !*(unsigned char *)(s2 + i))
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+		if (i > 1 && s1[i - 1] != '=')
+			return (777);
+		i++;
 	}
 	return (0);
 }
@@ -57,9 +81,12 @@ int	ft_export(t_list **env, char *str)
 	else
 	{
 		while ((*env)->next)
+		{
 			(*env) = (*env)->next;
-		(*(env))->content = str;
-		new = ft_lstnew(NULL);
+			// if (ft_strncmp_ust(str, (*env)->content, ft_strlen(str)) == 777)
+			// 	ft_unset(ft_split(str, '=')[0], env);
+		}
+		new = ft_lstnew(str);
 		ft_lstadd_back(env, new);
 	}
 	*env = first;

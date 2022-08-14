@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/04 16:28:25 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/14 17:36:43 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ typedef struct s_main
 	int		out;
 	t_lis	*p_list;
 	int		status;
+	char	**my_env;
 }	t_main;
 
 //parser
 
 //void	rl_replace_line(char *c, int i);
-int		minishell(char **env);
+int		minishell(t_main *main_stuct);
 void	sig_int(int sig);
 int		ft_prepars(char *str);
 int		pre_end_slesh(char *str, int len);
@@ -77,7 +78,7 @@ int		pre_start(char *str, int i, int len);
 int		pre_quote(char *str, int len);
 void	pre_o_quote(char *str, int *i, int *o_flag);
 void	pre_d_quote(char *str, int *i, int *d_flag);
-int		ft_parser(char *str, char **env);
+int		ft_parser(char *str, t_main *main_stuct);
 
 char	*s_quote(char *str, int *i);
 char	*ft_slesh(char *str, int *i);
@@ -112,7 +113,7 @@ int		count_args(char **words);
 char	**get_args(char **words);
 int		count_redir(char **words);
 
-int		com_parser_api(char ***blocks, int count_blocks, char **env);
+int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);
 
 //coms
 
@@ -135,10 +136,12 @@ int		ft_liss_len(t_lis *env);
 int		ft_dup_call(t_main *m_s, t_list **env, char **my_env);
 int		ft_for_buildins(char *com, t_list **env, char **arg);
 int		ft_do_ur_job(t_main *m_s, t_list **env, char **my_env);
-int		main_exe(t_lis *p_list, char **envp);
+int		main_exe(t_lis *p_list, t_main *main_stuct);
 
 char	**ft_from_lists_to_str(t_list *env);
 
 pid_t	ft_obrabotka(char **str, char **envp);
+
+t_list	*ft_create_env(char **envp);
 
 #endif

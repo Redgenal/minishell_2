@@ -17,7 +17,7 @@ void	ft_remove(t_list **env)
 	t_list	*clear;
 
 	clear = (*env)->next;
-	(*env)->next = (*env)->next->next;
+	(*env)->next = clear->next;
 	free(clear);
 }
 
@@ -28,15 +28,19 @@ int	ft_unset(char *str, t_list **env)
 
 	flag = 0;
 	first = *env;
-	while ((*env)->next)
+	while ((*env)->next != NULL)
 	{
+		//если не последний
 		if ((ft_strncmp((*env)->next->content, str, ft_strlen(str)) == 0)
 			&& ((*env)->next->content[ft_strlen(str)] == '='))
 		{
 			ft_remove(env);
 			flag = 1;
 		}
+		//если последний
+		{}
 		(*env) = (*env)->next;
+		
 	}
 	*env = first;
 	if (flag == 0)

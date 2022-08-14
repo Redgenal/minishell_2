@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/04 20:28:06 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/14 18:56:52 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sig_int(int sig)
 	(void)sig;
 }
 
-int	minishell(char **env)
+int	minishell(t_main *main_struct)
 {
 	char	*str;
 	int		pre;
@@ -40,9 +40,7 @@ int	minishell(char **env)
 		}
 		pre = ft_prepars(str);
 		if (!pre)
-		{
-			ft_parser(str, env);
-		}
+			ft_parser(str, main_struct);
 		free (str);
 	}
 	free (str);
@@ -52,8 +50,13 @@ int	minishell(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	struct termios	p;
+	t_main			*main_struct;
+	t_list	*enve;
 
 	tcgetattr(0, &p);
+	main_struct = (t_main *) malloc (sizeof(*main_struct));
+	enve = ft_create_env(env);
+	main_struct->my_env = ft_from_lists_to_str(enve);
 	p.c_lflag &= ~(ECHOCTL);
 	tcsetattr(0, 0, &p);
 	(void)argv;
@@ -64,5 +67,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, SIG_IGN);
-	return (minishell(env));
+	return (minishell(main_struct));
 }

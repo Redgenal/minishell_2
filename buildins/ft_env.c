@@ -14,10 +14,14 @@
 
 int	ft_env(t_list *env)
 {
-	while (env->next != NULL)
+	t_list	*first;
+
+	first = env;
+	while (env != NULL)
 	{
 		printf("%s\n", env->content);
 		env = env->next;
 	}
+	env = first;
 	return (0);
 }

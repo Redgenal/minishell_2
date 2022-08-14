@@ -16,7 +16,7 @@ int	ft_lists_len(t_list *env)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (env->next)
 	{
 		i++;

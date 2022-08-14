@@ -67,8 +67,6 @@ t_list	*ft_create_env(char **envp)
 		list = ft_lstnew(envp[i]);
 		ft_lstadd_back(&env, list);
 	}
-	list = ft_lstnew(NULL);
-	ft_lstadd_back(&env, list);
 	return (env);
 }
 
@@ -115,7 +113,24 @@ void	ft_pipe_redir(int i, int **pipes, t_lis *p_one, int out)
 		ft_circle_pipes_redir(pipes, i);
 }
 
-int	main_exe(t_lis *p_list, char **envp)
+void	ft_free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	printf("%d\n", i);
+	while (--i >= 0)
+	{
+		arr[i] = NULL;
+	}
+	if(arr != NULL)
+		free(arr);
+	// arr = NULL;
+}
+
+int	main_exe(t_lis *p_list, t_main *main_struct)
 {
 	t_list	*env;
 	int		i;
@@ -124,16 +139,14 @@ int	main_exe(t_lis *p_list, char **envp)
 	int		status;
 	pid_t	pid;
 	t_lis	*p_one;
-	t_main	*main_struct;
 
 	env = NULL;
 	pipes = NULL;
-	main_struct = (t_main *) malloc (sizeof(*main_struct));
 	main_struct->p_list = p_list;
 	main_struct->out = dup(STDOUT_FILENO);
 	main_struct->in = dup(STDIN_FILENO);
 	main_struct->status = 0;
-	env = ft_create_env(envp);
+	env = ft_create_env(main_struct->my_env);
 	my_env = ft_from_lists_to_str(env);
 	p_one = p_list;
 	if (p_list->next != NULL)
@@ -155,6 +168,8 @@ int	main_exe(t_lis *p_list, char **envp)
 		i++;
 		main_struct->p_list = main_struct->p_list->next;
 	}
+	ft_free_arr(main_struct->my_env);
+	main_struct->my_env = ft_from_lists_to_str(env);
 	waitpid(pid, &status, 0);
 	dup2(main_struct->in, 0);
 	dup2(main_struct->out, 1);
