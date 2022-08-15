@@ -55,17 +55,19 @@ int	ft_exit(char *str, char **strs)
 {
 	int	n;
 
+	if (!str)
+		exit(0);
 	n = ft_atoi(str);
 	if (n == 0 && ft_isdigit(str[0]))
-		return (0);
+		exit(0);
 	else
 	{
-		if (strs[1])
+		if (strs[2])
 		{
-			ft_putstr_fd("minishell: exit: too many arguments", 2);
-			return (1);
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			exit(1);
 		}
 		else
-			return (ft_one_arg(n, str));
+			exit(ft_one_arg(n, str));
 	}
 }

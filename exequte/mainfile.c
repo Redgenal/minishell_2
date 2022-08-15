@@ -120,7 +120,6 @@ void	ft_free_arr(char **arr)
 	i = 0;
 	while (arr[i])
 		i++;
-	printf("%d\n", i);
 	while (--i >= 0)
 	{
 		arr[i] = NULL;

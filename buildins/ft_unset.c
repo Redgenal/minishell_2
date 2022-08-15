@@ -12,13 +12,14 @@
 
 #include "../headers/minishell.h"
 
-void	ft_remove(t_list **env)
+void	ft_remove(t_list **env, int *flag)
 {
 	t_list	*clear;
 
 	clear = (*env)->next;
 	(*env)->next = clear->next;
 	free(clear);
+	*flag = 1;
 }
 
 int	ft_unset(char *str, t_list **env)
@@ -30,16 +31,11 @@ int	ft_unset(char *str, t_list **env)
 	first = *env;
 	while ((*env)->next != NULL)
 	{
-		//если не последний
 		if ((ft_strncmp((*env)->next->content, str, ft_strlen(str)) == 0)
 			&& ((*env)->next->content[ft_strlen(str)] == '='))
-		{
-			ft_remove(env);
-			flag = 1;
-		}
-		//если последний
-		{}
-		(*env) = (*env)->next;
+			ft_remove(env, &flag);
+		if ((*env)->next)
+			(*env) = (*env)->next;
 		
 	}
 	*env = first;

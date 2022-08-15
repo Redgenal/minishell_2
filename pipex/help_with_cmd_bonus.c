@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:04:47 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/04 17:33:16 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/15 20:31:06 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_check_file(char **arr, char **cmd)
 	{
 		tmp = ft_strjoin(ft_strjoin(arr[i], "/"), cmd[0]);
 		if (tmp == NULL)
-			ft_call_com_not_found(cmd[0]);
+			ft_call_cant_exe(cmd[0]);
 		if (access(tmp, 0))
 			free(tmp);
 		else

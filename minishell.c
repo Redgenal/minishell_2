@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/14 18:56:52 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/15 20:23:57 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	minishell(t_main *main_struct)
 		pre = ft_prepars(str);
 		if (!pre)
 			ft_parser(str, main_struct);
+		else
+			main_struct->status = 258;
 		free (str);
 	}
 	free (str);

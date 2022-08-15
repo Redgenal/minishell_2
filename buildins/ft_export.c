@@ -30,7 +30,7 @@ int	ft_ret_code(int value, char *str)
 int	ft_no_arg(t_list *env)
 {
 	char	**parse;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (env)
@@ -63,10 +63,10 @@ int	ft_strncmp_ust(const char *s1, const char *s2, size_t n)
 			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
 		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
 			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
-		if (i > 1 && s1[i - 1] != '=')
-			return (777);
 		i++;
 	}
+	if (s2[i] == '=')
+		return (777);
 	return (0);
 }
 
@@ -83,8 +83,11 @@ int	ft_export(t_list **env, char *str)
 		while ((*env)->next)
 		{
 			(*env) = (*env)->next;
-			// if (ft_strncmp_ust(str, (*env)->content, ft_strlen(str)) == 777)
-			// 	ft_unset(ft_split(str, '=')[0], env);
+			if (ft_strncmp_ust(str, (*env)->content, ft_strlen(ft_split(str, '=')[0])) == 777)
+			{
+				*env = first;
+				ft_unset(ft_split(str, '=')[0], env);
+			}
 		}
 		new = ft_lstnew(str);
 		ft_lstadd_back(env, new);
