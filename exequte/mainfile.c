@@ -126,7 +126,6 @@ void	ft_free_arr(char **arr)
 	}
 	if(arr != NULL)
 		free(arr);
-	// arr = NULL;
 }
 
 int	main_exe(t_lis *p_list, t_main *main_struct)
@@ -142,9 +141,6 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 	env = NULL;
 	pipes = NULL;
 	main_struct->p_list = p_list;
-	main_struct->out = dup(STDOUT_FILENO);
-	main_struct->in = dup(STDIN_FILENO);
-	main_struct->status = 0;
 	env = ft_create_env(main_struct->my_env);
 	my_env = ft_from_lists_to_str(env);
 	p_one = p_list;
@@ -176,6 +172,11 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 		ft_free_all(pipes, ft_liss_len(p_one));
 	if (pid)
 		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+	{
+		printf("dd\n");
+		return (128 + WTERMSIG(status));
+	}
 	else
 		return (main_struct->status);
 }

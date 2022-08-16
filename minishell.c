@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/15 20:23:57 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/16 19:10:11 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	minishell(t_main *main_struct)
 	str = NULL;
 	while (1)
 	{
+		sig_main();
 		pre = 0;
 		str = readline(PROMPT);
 		if (str && str[0] != '\0')
@@ -53,10 +54,13 @@ int	main(int argc, char **argv, char **env)
 {
 	struct termios	p;
 	t_main			*main_struct;
-	t_list	*enve;
+	t_list			*enve;
 
 	tcgetattr(0, &p);
 	main_struct = (t_main *) malloc (sizeof(*main_struct));
+	main_struct->out = dup(STDOUT_FILENO);
+	main_struct->in = dup(STDIN_FILENO);
+	main_struct->status = 0;
 	enve = ft_create_env(env);
 	main_struct->my_env = ft_from_lists_to_str(enve);
 	p.c_lflag &= ~(ECHOCTL);
@@ -67,7 +71,5 @@ int	main(int argc, char **argv, char **env)
 		printf("%s\n", "The programm must not have arguments");
 		return (1);
 	}
-	signal(SIGINT, &sig_int);
-	signal(SIGQUIT, SIG_IGN);
 	return (minishell(main_struct));
 }

@@ -46,7 +46,6 @@ int	ft_no_arg(t_list *env)
 		i++;
 		env = env->next;
 	}
-	printf("i = %d\n", i);
 	return (0);
 }
 
@@ -83,7 +82,8 @@ int	ft_export(t_list **env, char *str)
 		while ((*env)->next)
 		{
 			(*env) = (*env)->next;
-			if (ft_strncmp_ust(str, (*env)->content, ft_strlen(ft_split(str, '=')[0])) == 777)
+			if (ft_strncmp_ust(str, (*env)->content,
+					ft_strlen(ft_split(str, '=')[0])) == 777)
 			{
 				*env = first;
 				ft_unset(ft_split(str, '=')[0], env);

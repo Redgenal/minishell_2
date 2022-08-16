@@ -55,23 +55,43 @@ char	**ft_from_lists_to_str(t_list *env)
 	return (envp);
 }
 
-int	ft_here_doc(char *stop)
+int	ft_here_doc(char *stop, t_main *m_s)
 {
 	int		pip[2];
 	char	*buff;
+	pid_t	pid;
+	int		status;
+	(void) m_s;
 
 	buff = malloc(sizeof(*buff));
 	pipe(pip);
-	while (buff != NULL)
+	pid = fork();
+	if (pid < 0)
+		perror("Pipe error: ");
+	else if (pid == 0)
 	{
-		free(buff);
-		write(1, "> ", 2);
-		buff = get_next_line(0);
-		if (ft_strncmp(buff, stop, ft_strlen(stop) + 1) == 0)
-			break ;
-		write(pip[1], buff, ft_strlen(buff));
-		write(pip[1], "\n", 1);
+		sig_heredoc();
+		while (buff != NULL)
+		{
+			free(buff);
+			write(1, "> ", 2);
+			buff = get_next_line(0);
+			if (!buff)
+				return (-1);
+			if (ft_strncmp(buff, stop, ft_strlen(stop) + 1) == 0)
+				break ;
+			write(pip[1], buff, ft_strlen(buff));
+			write(pip[1], "\n", 1);
+		}
+		exit(0);
 	}
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		printf("hello\n");
+		return ((128 + WTERMSIG(status)) * -1);
+	}
+	printf("No\n");
 	if (buff)
 		free(buff);
 	close(pip[1]);

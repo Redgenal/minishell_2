@@ -36,7 +36,6 @@ int	ft_unset(char *str, t_list **env)
 			ft_remove(env, &flag);
 		if ((*env)->next)
 			(*env) = (*env)->next;
-		
 	}
 	*env = first;
 	if (flag == 0)
