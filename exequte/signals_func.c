@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   com_parse_api.c                                    :+:      :+:    :+:   */
+/*   signals_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/17 20:04:26 by utawana          ###   ########.fr       */
+/*   Created: 2022/08/17 17:52:15 by utawana           #+#    #+#             */
+/*   Updated: 2022/08/17 19:26:55 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-void	blocks_free(char ***blocks, int i, int j)
+void	sig_inti(int sig)
 {
-	i--;
-	j--;
-	while (i >= 0)
-	{
-		while (j >= 0)
-		{
-			free(blocks[i][j]);
-			j--;
-		}
-		free(blocks[i]);
-		i--;
-	}
-	free(blocks);
+	printf("^C\n");
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
 }
 
-int	com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct)
+void	sig_intie(int sig)
 {
-	t_lis	*lis;
-	int		rez;
+	printf("^\\Quit: 3\n");
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
+}
 
-	lis = create_list(blocks, count_blocks);
-	if (count_blocks != 0)
-	{
-		rez = main_exe(lis, main_stuct);
-		if (rez < 0)
-			rez *= -1;
-		return (rez);
-	}
-	else
-		return (0);
+void	sig_kill(int sig)
+{
+	exit(11);
+	(void)sig;
+}
+
+void	sig_inta(int sig)
+{
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
 }

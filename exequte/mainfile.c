@@ -124,15 +124,23 @@ void	ft_free_arr(char **arr)
 	{
 		arr[i] = NULL;
 	}
-	if(arr != NULL)
+	if (arr != NULL)
 		free(arr);
+}
+
+int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_lis *p_one)
+{
+	dup2(main_struct->in, 0);
+	dup2(main_struct->out, 1);
+	if (pipes)
+		ft_free_all(pipes, ft_liss_len(p_one));
+	return (pid);
 }
 
 int	main_exe(t_lis *p_list, t_main *main_struct)
 {
 	t_list	*env;
 	int		i;
-	char	**my_env;
 	int		**pipes;
 	int		status;
 	pid_t	pid;
@@ -140,9 +148,9 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 
 	env = NULL;
 	pipes = NULL;
+	status = 0;
 	main_struct->p_list = p_list;
 	env = ft_create_env(main_struct->my_env);
-	my_env = ft_from_lists_to_str(env);
 	p_one = p_list;
 	if (p_list->next != NULL)
 	{
@@ -158,9 +166,11 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 			ft_pipe_redir(i, pipes, p_one, main_struct->out);
 		sig_func();
 		if (main_struct->p_list->redir != NULL)
-			pid = ft_dup_call(main_struct, &env, my_env);
+			pid = ft_dup_call(main_struct, &env, main_struct->my_env);
 		else
-			pid = ft_do_ur_job(main_struct, &env, my_env);
+			pid = ft_do_ur_job(main_struct, &env, main_struct->my_env);
+		if (pid < 0)
+			return (ft_error_return(pid, main_struct, pipes, p_one));
 		i++;
 		main_struct->p_list = main_struct->p_list->next;
 	}
@@ -171,13 +181,10 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 	dup2(main_struct->out, 1);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(p_one));
-	if (pid)
+	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status))
-	{
-		printf("dd\n");
 		return (128 + WTERMSIG(status));
-	}
 	else
 		return (main_struct->status);
 }

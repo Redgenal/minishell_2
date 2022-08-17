@@ -27,7 +27,7 @@ int	ft_check(char *str)
 
 int	ft_isstring(char *str)
 {
-	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd("minishell$ exit: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 	return (255);
@@ -64,7 +64,7 @@ int	ft_exit(char *str, char **strs)
 	{
 		if (strs[2])
 		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			ft_putstr_fd("minishell$ exit: too many arguments\n", 2);
 			exit(1);
 		}
 		else

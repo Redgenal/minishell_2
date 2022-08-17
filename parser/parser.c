@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/14 17:13:50 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/17 20:02:26 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,28 @@ int	count_d_quote(char *str, int i)
 	return (i);
 }
 
+void	set_blocks(int count_param, char ***blocks, char **pipes, t_main *main)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < count_param)
+	{
+		j = 0;
+		blocks[i] = get_list_words(pipes[i]);
+		while (blocks[i][j])
+		{
+			blocks[i][j] = parse_word(blocks[i][j], main->my_env);
+			j++;
+		}
+	}
+	blocks[i] = NULL;
+}
+
 int	ft_parser(char *str, t_main *main_struct)
 {
 	int		i;
-	int		j;
-	int		count_param;
 	char	**pipes_strs;
 	char	***blocks;
 
@@ -80,19 +97,6 @@ int	ft_parser(char *str, t_main *main_struct)
 	blocks = (char ***) malloc(sizeof(char **) * (i + 1));
 	if (!blocks)
 		return (0);
-	count_param = i;
-	i = -1;
-	while (++i < count_param)
-	{
-		j = 0;
-		blocks[i] = get_list_words(pipes_strs[i]);
-		while (blocks[i][j])
-		{
-			blocks[i][j] = parse_word(blocks[i][j], main_struct->my_env);
-			j++;
-		}
-	}
-	blocks[i] = NULL;
-	com_parser_api(blocks, i, main_struct);
-	return (0);
+	set_blocks(i, blocks, pipes_strs, main_struct);
+	return (com_parser_api(blocks, i, main_struct));
 }

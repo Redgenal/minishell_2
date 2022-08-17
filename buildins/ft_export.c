@@ -16,14 +16,14 @@ int	ft_ret_code(int value, char *str)
 {
 	if (str && (value == 0))
 		ft_putstr_fd(str, 1);
-	else if (str && (value == 1))
+	else if (str && (value == -1))
 	{
-		ft_putstr_fd("minishell: export: ", 2);
+		ft_putstr_fd("minishell$ export: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
-	else if ((value == 1) && !str)
-		perror("minishell: cd: ");
+	else if ((value == -1) && !str)
+		perror("minishell$ cd: ");
 	return (value);
 }
 
@@ -39,7 +39,7 @@ int	ft_no_arg(t_list *env)
 		{
 			parse = ft_split(env->content, '=');
 			if (!parse)
-				return (ft_ret_code(1, NULL));
+				return (ft_ret_code(-1, NULL));
 			printf("declare -x %s=%c%s%c\n", parse[0], '"', parse[1], '"');
 			free(parse);
 		}

@@ -5,7 +5,8 @@ SOURCES	= minishell.c parser/preparser.c parser/preparser_utils.c parser/prepars
 		parser/get_list_word.c parser/struct_utils.c parser/struct_utils_two.c exequte/mainfile.c buildins/ft_cd.c \
 		buildins/ft_echo.c buildins/ft_env.c buildins/ft_exit.c buildins/ft_export.c buildins/ft_pwd.c buildins/ft_unset.c \
 		exequte/help.c errors/error_help_bonus.c pipex/help_with_cmd_bonus.c pipex/get_next_line_bonus.c parser/com_parse_api.c \
-		pipex/get_next_line_utils_bonus.c exequte/redir.c errors/errors_in_redir.c exequte/job.c pipex/dop_help_bonus.c exequte/signals.c
+		pipex/get_next_line_utils_bonus.c exequte/redir.c errors/errors_in_redir.c exequte/job.c pipex/dop_help_bonus.c exequte/signals.c \
+		exequte/signals_func.c
 
 OBJECTS	= $(SOURCES:%.c=%.o)
 

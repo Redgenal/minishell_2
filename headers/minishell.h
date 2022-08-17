@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 16:47:32 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/17 17:53:33 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,9 @@ void	sig_main(void);
 void	sig_heredoc(void);
 void	sig_int(int sig);
 void	sig_ignore(void);
+void	sig_kill(int sig);
+void	sig_inta(int sig);
+void	sig_intie(int sig);
+void	sig_inti(int sig);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:23:48 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/17 15:58:43 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/17 20:41:47 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	ft_dup_call(t_main *m_s, t_list **env, char **my_env)
 		if (m_s->p_list->redir->type == 1 || m_s->p_list->redir->type == 3)
 			fd = ft_get_in_fd(m_s, m_s->p_list);
 		if (fd < 0)
-			return (fd * -1);
+			return (fd);
 		d1 = ft_lets_dup(m_s, fd);
 		if (d1 == -127)
-			return (d1 * (-1));
+			return (d1);
 		m_s->p_list->redir = m_s->p_list->redir->next;
 	}
 	return (ft_do_ur_job(m_s, env, my_env));

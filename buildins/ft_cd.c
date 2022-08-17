@@ -16,13 +16,13 @@ int	ft_ret_cd_code(int value, char *str)
 {
 	if (str && (value == 0))
 		ft_putstr_fd(str, 1);
-	else if (str && (value == 1))
+	else if (str && (value == -1))
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd("minishell$ cd: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
-	else if ((value == 1) && !str)
+	else if ((value == -1) && !str)
 		perror("minishell: cd: ");
 	return (value);
 }
@@ -35,12 +35,12 @@ int	ft_cd(char *str, t_list **env)
 
 	new_opwd = getcwd(NULL, 1000);
 	if (!new_opwd)
-		return (ft_ret_cd_code(1, NULL));
+		return (ft_ret_cd_code(-1, NULL));
 	if (chdir(str))
-		return (ft_ret_cd_code(1, str));
+		return (ft_ret_cd_code(-1, str));
 	new_pwd = getcwd(NULL, 1000);
 	if (!new_pwd)
-		return (ft_ret_cd_code(1, NULL));
+		return (ft_ret_cd_code(-1, NULL));
 	first = (*(env));
 	while ((*env)->next)
 	{

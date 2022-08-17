@@ -12,29 +12,6 @@
 
 #include "../headers/minishell.h"
 
-int	ft_lists_len(t_list *env)
-{
-	int	i;
-
-	i = 1;
-	while (env->next)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
-}
-
-int	ft_arr_len(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		i++;
-	return (i);
-}
-
 char	**ft_from_lists_to_str(t_list *env)
 {
 	char	**envp;
@@ -59,6 +36,7 @@ void	ft_child_func(char **buff, int *pip, char *stop)
 {
 	while (*buff != NULL)
 	{
+		sig_heredoc();
 		free(*buff);
 		write(1, "> ", 2);
 		*buff = get_next_line(0);
@@ -81,13 +59,11 @@ int	ft_here_doc(char *stop)
 
 	buff = malloc(sizeof(*buff));
 	pipe(pip);
-	sig_heredoc();
 	pid = fork();
 	if (pid < 0)
 		perror("Pipe error: ");
 	else if (pid == 0)
 		ft_child_func(&buff, &pip[1], stop);
-	sig_ignore();
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) == 11)
 		return ((128 + WTERMSIG(status)) * -1);

@@ -18,12 +18,12 @@ int	ft_ret_pwd_code(int value, char *str)
 		ft_putstr_fd(str, 1);
 	else if (str && (value == 1))
 	{
-		ft_putstr_fd("minishell: pwd: ", 2);
+		ft_putstr_fd("minishell$ pwd: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
 	else if ((value == 1) && !str)
-		perror("minishell: cd: ");
+		perror("minishell$ cd: ");
 	return (value);
 }
 
