@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/16 20:53:39 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:47:32 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		ft_call_file_not_found(t_main *m_s, char *str);
 int		ft_is_a_dire(t_main *m_s, char *str);
 int		ft_perm_denied(t_main *m_s, char *str);
 
-int		ft_here_doc(char *stop, t_main *m_s);
+int		ft_here_doc(char *stop);
 int		ft_lists_len(t_list *env);
 int		ft_liss_len(t_lis *env);
 
@@ -148,5 +148,6 @@ void	sig_func(void);
 void	sig_main(void);
 void	sig_heredoc(void);
 void	sig_int(int sig);
+void	sig_ignore(void);
 
 #endif

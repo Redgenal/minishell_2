@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:23:48 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/16 20:52:52 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:58:43 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_get_in_fd(t_main *m_s, t_lis *p_list)
 			return (ft_call_file_not_found(m_s, p_list->redir->file));
 	}
 	else
-		fd = ft_here_doc(p_list->redir->file, m_s);
+		fd = ft_here_doc(p_list->redir->file);
 	return (fd);
 }
 

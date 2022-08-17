@@ -156,6 +156,7 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 	{
 		if ((ft_liss_len(p_one) != 1) && (i <= (ft_liss_len(p_one) - 1)))
 			ft_pipe_redir(i, pipes, p_one, main_struct->out);
+		sig_func();
 		if (main_struct->p_list->redir != NULL)
 			pid = ft_dup_call(main_struct, &env, my_env);
 		else
