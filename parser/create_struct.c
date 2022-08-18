@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:57:07 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/03 19:48:55 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/18 19:46:48 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,29 @@ int	count_args(char **words)
 	return (count);
 }
 
-char	**get_args(char **words)
+char	**get_args(char **words, t_main *main_stuct)
 {
 	int		i;
 	int		j;
 	char	**args;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	args = (char **) malloc (sizeof(char *) * (count_args(words) + 1));
 	if (!args)
 		return (0);
-	while (words[i])
+	while (words[++i])
 	{
 		if (get_redir(words[i]) != -1)
 			i++;
 		else
 		{
-			args[j] = ft_strdup(words[i]);
+			if (ft_strncmp("$?", words[i], ft_strlen(words[i])) == 0)
+				args[j] = ft_itoa(main_stuct->status);
+			else
+				args[j] = ft_strdup(words[i]);
 			j++;
 		}
-		i++;
 	}
 	args[j] = NULL;
 	return (args);
@@ -90,7 +92,7 @@ int	count_redir(char **words)
 	return (count);
 }
 
-t_lis	*create_list(char ***blocks, int count_blocks)
+t_lis	*create_list(char ***blocks, int count_blocks, t_main *main_stuct)
 {
 	int		i;
 	t_lis	*list;
@@ -103,7 +105,7 @@ t_lis	*create_list(char ***blocks, int count_blocks)
 		new = (t_lis *) malloc(sizeof(*new));
 		new->redir = NULL;
 		new->redir = get_list_redir(blocks[i]);
-		new->args = get_args(blocks[i]);
+		new->args = get_args(blocks[i], main_stuct);
 		new->next = NULL;
 		ft_lisadd_back(&list, new);
 		i++;

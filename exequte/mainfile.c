@@ -137,6 +137,7 @@ int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_lis *p_one)
 	return (pid);
 }
 
+//Разбить на функции, отчистить env, поиграть с переменными, в хирдоке работают 2 разных обработчика сигнала
 int	main_exe(t_lis *p_list, t_main *main_struct)
 {
 	t_list	*env;
@@ -151,7 +152,6 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 	status = 0;
 	main_struct->p_list = p_list;
 	env = ft_create_env(main_struct->my_env);
-	p_one = p_list;
 	if (p_list->next != NULL)
 	{
 		pipes = ft_create_pipes(ft_liss_len(p_list));
@@ -159,6 +159,8 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 			return (1);
 		p_list = p_list->next;
 	}
+	//start
+	p_one = main_struct->p_list;
 	i = 0;
 	while (main_struct->p_list != NULL)
 	{
@@ -174,6 +176,7 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 		i++;
 		main_struct->p_list = main_struct->p_list->next;
 	}
+	//end
 	ft_free_arr(main_struct->my_env);
 	main_struct->my_env = ft_from_lists_to_str(env);
 	waitpid(pid, &status, 0);

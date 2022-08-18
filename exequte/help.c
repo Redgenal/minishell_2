@@ -59,6 +59,7 @@ int	ft_here_doc(char *stop)
 
 	buff = malloc(sizeof(*buff));
 	pipe(pip);
+	sig_ignore();
 	pid = fork();
 	if (pid < 0)
 		perror("Pipe error: ");

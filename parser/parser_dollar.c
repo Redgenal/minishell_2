@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:59:21 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/03 15:22:42 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/18 19:26:15 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*ft_get_dollar_end(int *flag, char *env_k, char *tmp, int z)
 	char	*tmp1;
 
 	tmp1 = NULL;
+	if (ft_strncmp("$?", tmp, ft_strlen(tmp)) == 0)
+		return (tmp);
 	if (env_k)
 	{
 		tmp1 = ft_substr(env_k, z + 1, strlen(env_k) - z);
@@ -63,6 +65,7 @@ char	*ft_get_dollar(char *str, int *i, char **env, int *flag)
 
 	z = 0;
 	tmp = ft_get_env_name(str, i);
+	tmp1 = NULL;
 	k = -1;
 	while (env[++k] != NULL)
 	{
@@ -76,7 +79,8 @@ char	*ft_get_dollar(char *str, int *i, char **env, int *flag)
 				break ;
 		}
 	}
-	free(tmp1);
+	if (tmp1)
+		free(tmp1);
 	return (ft_get_dollar_end(flag, env[k], tmp, z));
 }
 

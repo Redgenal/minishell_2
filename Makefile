@@ -22,12 +22,12 @@ FLAGS 	=  -Werror -Wextra -Wall  -I $(HEADER)
 
 all	: $(NAME)
 
-$(NAME)	: $(HEADER) $(OBJECTS)
+$(NAME)	: $(HEADER)/*.h $(OBJECTS)
 	make -C libft
 	make -C libft bonus
 	$(CC) $(FLAGS) $(OBJECTS) $(LIB) -lreadline -L/Users/gantedil/.brew/opt/readline/lib -I/Users/gantedil/.brew/opt/readline/include -o $(NAME) 
 
-%.o	: %.c $(HEADER)
+%.o	: %.c $(HEADER)/*.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean	:

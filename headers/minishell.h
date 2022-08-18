@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 17:53:33 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/18 19:47:38 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ t_redir	*ft_redirnew(void *type, void *content);
 void	ft_rediradd_back(t_redir **lst, t_redir *new);
 void	ft_lisadd_back(t_lis **lst, t_lis *new);
 t_lis	*ft_lislast(t_lis *lst);
-t_lis	*create_list(char ***blocks, int count_blocks);
+t_lis	*create_list(char ***blocks, int count_blocks, t_main *main_stuct);
 int		get_redir(char *str);
 int		count_args(char **words);
-char	**get_args(char **words);
+char	**get_args(char **words, t_main *main_stuct);
 int		count_redir(char **words);
 
 int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:28:50 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/27 17:48:01 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:58:46 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 				free(p);
 				p = tmp;
 			}
-			*lst = 0;
+			*lst = NULL;
 		}
 	}
 }

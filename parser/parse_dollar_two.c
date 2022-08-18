@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dollar_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:26:48 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/03 15:22:22 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/18 19:54:55 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*create_some_var(char *str, int *i, char **env)
 	flag = 0;
 	tmp = ft_substr(str, 0, j);
 	tmp1 = ft_get_dollar(str, &j, env, &flag);
+	if (ft_strncmp("$?", tmp1, ft_strlen(tmp1)) == 0)
+		return (tmp1);
 	tmp2 = ft_strdup(str + *i + ft_strlen(ft_get_env_name(str, i)) + 1);
 	if (flag == 1)
 		tmp = ft_strjoin(tmp, tmp1);
@@ -46,7 +48,8 @@ char	*ft_split_dollar(char *str, int *i, char **env)
 	while (tmp3[j])
 	{
 		tmp = ft_strjoin(tmp, tmp3[j]);
-		tmp = ft_strjoin(tmp, " ");
+		if (j > 0 && tmp3[j + 1])
+			tmp = ft_strjoin(tmp, " ");
 		j++;
 	}
 	while (j >= 0)
@@ -55,6 +58,5 @@ char	*ft_split_dollar(char *str, int *i, char **env)
 		j--;
 	}
 	free(tmp3);
-	free (str);
 	return (tmp);
 }
