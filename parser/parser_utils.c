@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 04:57:54 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/03 16:49:55 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/18 20:48:36 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*s_quote(char *str, int *i)
 	tmp2 = ft_strdup (str + *i + 1);
 	tmp = ft_strjoin(tmp, tmp1);
 	tmp = ft_strjoin(tmp, tmp2);
-	(*i) -= 1;
+	(*i) -= 2;
 	free (tmp1);
 	free (tmp2);
 	free (str);
@@ -73,7 +73,7 @@ char	*ft_drop_slesh(char *str, int *i)
 			if (count % 2 == 0)
 				(*i) += count / 2 - 1;
 			else
-				(*i) += (count / 2) + 1;
+				(*i) += (count / 2);
 			return (tmp);
 		}
 	}
