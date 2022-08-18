@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dollar_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:26:48 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 19:54:55 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/18 22:22:28 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*create_some_var(char *str, int *i, char **env)
 	if (flag == 1)
 		tmp = ft_strjoin(tmp, tmp1);
 	tmp = ft_strjoin(tmp, tmp2);
+	(*i)--;
 	free (tmp1);
 	free (tmp2);
 	return (tmp);

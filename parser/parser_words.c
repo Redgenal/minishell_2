@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:51:25 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 20:53:36 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/18 22:28:03 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ char	*parse_word(char *param, char **env)
 		if (param[j] == '\'')
 			param = s_quote(param, &j);
 		if (param[j] == '$')
+		{
 			param = ft_split_dollar(param, &j, env);
+			continue ;
+		}
 		if (param[j] == '\\')
 			param = ft_slesh(param, &j);
 		if (param[j] == '\\' )
