@@ -67,7 +67,7 @@ int	ft_here_doc(char *stop)
 		ft_child_func(&buff, &pip[1], stop);
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) == 11)
-		return ((128 + WTERMSIG(status)) * -1);
+		return (-1);
 	if (buff)
 		free(buff);
 	close(pip[1]);

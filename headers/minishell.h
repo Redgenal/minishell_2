@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 19:47:38 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/18 22:11:50 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_main
 	int		in;
 	int		out;
 	t_lis	*p_list;
+	t_lis	*p_fitst;
 	int		status;
 	char	**my_env;
 }	t_main;
@@ -118,10 +119,10 @@ int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);
 //coms
 
 int		ft_env(t_list *env);
-int		ft_export(t_list **env, char *str);
+int		ft_export(t_list **env, char **str);
 int		ft_pwd(void);
 int		ft_cd(char *str, t_list **env);
-int		ft_echo(char *str, char *flag);
+int		ft_echo(char **args);
 int		ft_unset(char *str, t_list **env);
 int		ft_exit(char *str, char **strs);
 

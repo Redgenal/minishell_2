@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:57:07 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 19:46:48 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/18 20:30:51 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	**get_args(char **words, t_main *main_stuct)
 			i++;
 		else
 		{
-			if (ft_strncmp("$?", words[i], ft_strlen(words[i])) == 0)
+			if (ft_strncmp("$?", words[i], ft_strlen(words[i])) == 0
+				&& words[i][0] != 0)
 				args[j] = ft_itoa(main_stuct->status);
 			else
 				args[j] = ft_strdup(words[i]);

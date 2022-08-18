@@ -41,9 +41,9 @@ int	ft_for_buildins(char *com, t_list **env, char **arg)
 	else if (ft_strncmp(com, "env", 4) == 0)
 		return (ft_env(*env));
 	else if (ft_strncmp(com, "export", 7) == 0)
-		return (ft_export(env, arg[1]));
+		return (ft_export(env, arg));
 	else if (ft_strncmp(com, "echo", 5) == 0)
-		return (ft_echo(arg[1], arg[2]));
+		return (ft_echo(arg));
 	else if (ft_strncmp(com, "exit", 5) == 0)
 		return (ft_exit(arg[1], arg));
 	else if (ft_strncmp(com, "pwd", 4) == 0)
@@ -128,38 +128,35 @@ void	ft_free_arr(char **arr)
 		free(arr);
 }
 
-int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_lis *p_one)
+int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_list **env)
 {
 	dup2(main_struct->in, 0);
 	dup2(main_struct->out, 1);
+	while (*env)
+	{
+		free(*env);
+		(*env) = (*env)->next;
+	}
 	if (pipes)
-		ft_free_all(pipes, ft_liss_len(p_one));
+		ft_free_all(pipes, ft_liss_len(main_struct->p_fitst));
 	return (pid);
 }
 
-//Разбить на функции, отчистить env, поиграть с переменными, в хирдоке работают 2 разных обработчика сигнала
-int	main_exe(t_lis *p_list, t_main *main_struct)
+int	ft_return(int status, t_main *main_struct)
 {
-	t_list	*env;
-	int		i;
-	int		**pipes;
-	int		status;
-	pid_t	pid;
-	t_lis	*p_one;
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
+	else
+		return (main_struct->status);
+}
 
-	env = NULL;
-	pipes = NULL;
-	status = 0;
-	main_struct->p_list = p_list;
-	env = ft_create_env(main_struct->my_env);
-	if (p_list->next != NULL)
-	{
-		pipes = ft_create_pipes(ft_liss_len(p_list));
-		if (!pipes)
-			return (1);
-		p_list = p_list->next;
-	}
-	//start
+int	ft_main_job(t_main *main_struct, t_list **env, int **pipes, pid_t *pid)
+{
+	t_lis	*p_one;
+	int		i;
+
 	p_one = main_struct->p_list;
 	i = 0;
 	while (main_struct->p_list != NULL)
@@ -168,26 +165,44 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 			ft_pipe_redir(i, pipes, p_one, main_struct->out);
 		sig_func();
 		if (main_struct->p_list->redir != NULL)
-			pid = ft_dup_call(main_struct, &env, main_struct->my_env);
+			*pid = ft_dup_call(main_struct, env, main_struct->my_env);
 		else
-			pid = ft_do_ur_job(main_struct, &env, main_struct->my_env);
-		if (pid < 0)
-			return (ft_error_return(pid, main_struct, pipes, p_one));
+			*pid = ft_do_ur_job(main_struct, env, main_struct->my_env);
+		if (*pid < 0)
+			return (ft_error_return(*pid, main_struct, pipes, env));
 		i++;
 		main_struct->p_list = main_struct->p_list->next;
 	}
-	//end
+	return (0);
+}
+
+//Разбить на функции, поиграть с переменными
+int	main_exe(t_lis *p_list, t_main *main_struct)
+{
+	t_list	*env;
+	int		**pipes;
+	int		status;
+	pid_t	pid;
+	int		rez;
+
+	env = NULL;
+	pipes = NULL;
+	status = 0;
+	main_struct->p_list = p_list;
+	main_struct->p_fitst = p_list;
+	env = ft_create_env(main_struct->my_env);
+	if (p_list->next != NULL)
+	{
+		pipes = ft_create_pipes(ft_liss_len(p_list));
+		if (!pipes)
+			return (1);
+	}
+	rez = ft_main_job(main_struct, &env, pipes, &pid);
+	if (rez < 0)
+		return (rez);
 	ft_free_arr(main_struct->my_env);
 	main_struct->my_env = ft_from_lists_to_str(env);
 	waitpid(pid, &status, 0);
-	dup2(main_struct->in, 0);
-	dup2(main_struct->out, 1);
-	if (pipes)
-		ft_free_all(pipes, ft_liss_len(p_one));
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	else
-		return (main_struct->status);
+	ft_error_return(pid, main_struct, pipes, &env);
+	return (ft_return(status, main_struct));
 }

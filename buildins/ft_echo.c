@@ -12,11 +12,30 @@
 
 #include "../headers/minishell.h"
 
-int	ft_echo(char *str, char *flag)
+int	ft_echo(char **args)
 {
-	if (flag != NULL && ft_strncmp(flag, "-n", 3) == 0)
-		printf("%s", str);
+	int	i;
+
+	i = 0;
+	if (args[1] != NULL && ft_strncmp(args[1], "-n", 3) == 0)
+	{
+		i++;
+		while (args[++i])
+		{
+			printf("%s", args[i]);
+			if (args[i + 1])
+				printf(" ");
+		}
+	}
 	else
-		printf("%s\n", str);
+	{
+		while (args[++i])
+		{
+			printf("%s", args[i]);
+			if (args[i + 1])
+				printf(" ");
+		}
+		printf("\n");
+	}
 	return (0);
 }

@@ -69,29 +69,42 @@ int	ft_strncmp_ust(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	ft_export(t_list **env, char *str)
+void	ft_circle_func(t_list **env, char **str, t_list *first)
 {
+	int		i;
 	t_list	*new;
+
+	i = 0;
+	while (str[++i])
+	{
+		while ((*env))
+		{
+			if (ft_strncmp_ust(str[i], (*env)->content,
+					ft_strlen(ft_split(str[i], '=')[0])) == 777)
+			{
+				*env = first;
+				ft_unset(ft_split(str[i], '=')[0], env);
+			}
+			if ((*env)->next)
+				(*env) = (*env)->next;
+			else
+				break ;
+		}
+		new = ft_lstnew(str[i]);
+		ft_lstadd_back(env, new);
+		*env = first;
+	}
+}
+
+int	ft_export(t_list **env, char **str)
+{
 	t_list	*first;
 
 	first = *env;
-	if (str == NULL)
+	if (str[1] == NULL)
 		ft_no_arg(*env);
 	else
-	{
-		while ((*env)->next)
-		{
-			(*env) = (*env)->next;
-			if (ft_strncmp_ust(str, (*env)->content,
-					ft_strlen(ft_split(str, '=')[0])) == 777)
-			{
-				*env = first;
-				ft_unset(ft_split(str, '=')[0], env);
-			}
-		}
-		new = ft_lstnew(str);
-		ft_lstadd_back(env, new);
-	}
+		ft_circle_func(env, str, first);
 	*env = first;
 	return (0);
 }

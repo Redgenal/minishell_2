@@ -6,37 +6,37 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/18 20:06:14 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/18 20:33:23 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int count_str_for_blocks(char **block) 
-{ 
- int i; 
- 
- i = 0; 
- while (block[i]) 
-  i++; 
- return (i); 
-} 
- 
-void    blocks_free(char ***blocks, int i, int j) 
-{  
+int	count_str_for_blocks(char **block)
+{
+	int	i;
+
+	i = 0;
+	while (block[i])
+	i++;
+	return (i);
+}
+
+void	blocks_free(char ***blocks, int i, int j)
+{
 	i--;
-    while (i >= 0) 
-    { 
-  		j = count_str_for_blocks(blocks[i]); 
-        while (j >= 0) 
-        { 
-            free(blocks[i][j]); 
-            j--; 
-        } 
-        free(blocks[i]); 
-        i--; 
-    } 
-    free(blocks); 
+	while (i >= 0)
+	{
+		j = count_str_for_blocks(blocks[i]);
+		while (j >= 0)
+		{
+			free(blocks[i][j]);
+			j--;
+		}
+		free(blocks[i]);
+		i--;
+	}
+	free(blocks);
 }
 
 int	ft_lis_check(t_lis *lis)
