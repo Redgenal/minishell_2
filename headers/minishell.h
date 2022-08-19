@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 19:33:02 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 21:09:13 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,10 +252,13 @@ int		main_exe(t_lis *p_list, t_main *main_stuct);
 int		ft_error_return(pid_t pid, t_main *main_struct, int **pipes,
 			t_list **env);
 int		ft_create_main_pipes(int ***pipes, t_lis *p_list);
+int		ft_strncmp_ust(const char *s1, const char *s2, size_t n);
 
 void	ft_free_arr(char **arr);
 void	ft_circle_pipes_redir(int **pipes, int i);
 void	ft_p_list_clear(t_lis *p_list);
+void	ft_free_split(char **split);
+void	ft_help_export(char **split, t_list **env, char *str, t_list *first);
 
 char	**ft_from_lists_to_str(t_list *env);
 

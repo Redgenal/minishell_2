@@ -18,6 +18,7 @@ void	ft_remove(t_list **env, int *flag)
 
 	clear = (*env)->next;
 	(*env)->next = clear->next;
+	free(clear->content);
 	free(clear);
 	*flag = 1;
 }

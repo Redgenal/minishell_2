@@ -41,7 +41,7 @@ int	ft_no_arg(t_list *env)
 			if (!parse)
 				return (ft_ret_code(-1, NULL));
 			printf("declare -x %s=%c%s%c\n", parse[0], '"', parse[1], '"');
-			free(parse);
+			ft_free_split(parse);
 		}
 		i++;
 		env = env->next;
@@ -73,18 +73,16 @@ void	ft_circle_func(t_list **env, char **str, t_list *first)
 {
 	int		i;
 	t_list	*new;
+	char	**split;
 
 	i = 0;
 	while (str[++i])
 	{
 		while ((*env))
 		{
-			if (ft_strncmp_ust(str[i], (*env)->content,
-					ft_strlen(ft_split(str[i], '=')[0])) == 777)
-			{
-				*env = first;
-				ft_unset(ft_split(str[i], '=')[0], env);
-			}
+			split = ft_split(str[i], '=');
+			ft_help_export(split, env, str[i], first);
+			ft_free_split(split);
 			if ((*env)->next)
 				(*env) = (*env)->next;
 			else

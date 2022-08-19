@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:18:35 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/19 20:07:07 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 22:08:03 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	ft_p_list_clear(t_lis *p_list)
 		while (--i >= 0)
 		{
 			free(p_list->args[i]);
+			p_list->args[i] = NULL;
 		}
+		free(p_list->args);
 		while (p_list->redir)
 		{
 			red = p_list->redir->next;

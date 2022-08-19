@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:46:42 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/19 20:05:14 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 22:07:06 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_list **env)
 		free(*env);
 		(*env) = tmp;
 	}
-	free(tmp);
+	free(*env);
 	if (pipes)
 		ft_free_all(pipes, ft_liss_len(main_struct->p_fitst));
 	ft_p_list_clear(main_struct->p_fitst);

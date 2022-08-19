@@ -86,3 +86,13 @@ int	ft_liss_len(t_lis *env)
 	}
 	return (i);
 }
+
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+}
