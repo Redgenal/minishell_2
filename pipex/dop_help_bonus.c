@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 17:51:01 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/17 18:58:57 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 17:25:41 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,25 @@ void	ft_free_all(int **pipes, int argc)
 	int	i;
 
 	i = -1;
-	while (++i < (argc))
-		free(pipes[i]);
-	free(pipes);
-}
-
-void	ft_close_all(int **pipes, int argc)
-{
-	int	i;
-
-	i = -1;
-	while (++i < (argc - 4))
+	while (++i < (argc - 1))
 	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
+		free(pipes[i]);
 	}
+	if (pipes)
+		free(pipes);
 }
+
+// void	ft_close_all(int **pipes, int argc)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (++i < (argc - 4))
+// 	{
+// 		close(pipes[i][0]);
+// 		close(pipes[i][1]);
+// 	}
+// }
 
 // int	ft_choose_child(int **pipes, char **argv, char **envp, int i)
 // {

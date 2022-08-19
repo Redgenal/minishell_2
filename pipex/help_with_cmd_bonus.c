@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:04:47 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/15 20:31:06 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 18:04:01 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ char	**ft_find_path(char **envp)
 	char	**arr;
 	int		i;
 
-	i = 0;
-	while (envp[i++] != NULL)
-		if (ft_strncmp(envp[i], "PATH", 4) == 0)
+	i = -1;
+	arr = NULL;
+	while (envp[++i] != NULL)
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 			break ;
-	arr = ft_split(envp[i] + 5, ':');
+	if (envp[i])
+		arr = ft_split(envp[i] + 5, ':');
 	if (arr == NULL)
-		ft_call_exit("Error");
+		return (NULL);
 	return (arr);
 }
 
@@ -42,8 +44,8 @@ char	**ft_check_file(char **arr, char **cmd)
 	int		i;
 	char	*tmp;
 
-	i = 0;
-	while (arr[i++] != NULL)
+	i = -1;
+	while (arr[++i] != NULL)
 	{
 		tmp = ft_strjoin(ft_strjoin(arr[i], "/"), cmd[0]);
 		if (tmp == NULL)
@@ -80,8 +82,14 @@ char	**ft_change_cmd(char **cmd, char **envp)
 	cmd1 = ft_first_check_file(cmd);
 	if (cmd1 != NULL)
 		return (cmd1);
-	cmd2 = ft_check_file(path, cmd);
-	if (cmd2 == NULL)
-		ft_call_com_not_found(cmd[0]);
-	return (cmd2);
+	if (path)
+	{
+		cmd2 = ft_check_file(path, cmd);
+		if (cmd2 == NULL)
+			ft_call_com_not_found(cmd[0]);
+	}
+	if (cmd2)
+		return (cmd2);
+	else
+		return (cmd);
 }

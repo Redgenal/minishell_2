@@ -6,7 +6,7 @@ SOURCES	= minishell.c parser/preparser.c parser/preparser_utils.c parser/prepars
 		buildins/ft_echo.c buildins/ft_env.c buildins/ft_exit.c buildins/ft_export.c buildins/ft_pwd.c buildins/ft_unset.c \
 		exequte/help.c errors/error_help_bonus.c pipex/help_with_cmd_bonus.c pipex/get_next_line_bonus.c parser/com_parse_api.c \
 		pipex/get_next_line_utils_bonus.c exequte/redir.c errors/errors_in_redir.c exequte/job.c pipex/dop_help_bonus.c exequte/signals.c \
-		exequte/signals_func.c
+		exequte/signals_func.c exequte/mainfile_help.c
 
 OBJECTS	= $(SOURCES:%.c=%.o)
 
@@ -16,7 +16,7 @@ NAME 	= minishell
 
 LIB		= libft/libft.a
 
-FLAGS 	= -I $(HEADER)
+FLAGS 	=  -Werror -Wextra -Wall  -I $(HEADER)
 
 .PHONY	: all clean fclean re
 

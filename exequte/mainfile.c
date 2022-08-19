@@ -34,57 +34,6 @@ pid_t	ft_obrabotka(char **str, char **envp)
 	return (pid);
 }
 
-int	ft_for_buildins(char *com, t_list **env, char **arg)
-{
-	if (ft_strncmp(com, "cd", 3) == 0)
-		return (ft_cd(arg[1], env));
-	else if (ft_strncmp(com, "env", 4) == 0)
-		return (ft_env(*env));
-	else if (ft_strncmp(com, "export", 7) == 0)
-		return (ft_export(env, arg));
-	else if (ft_strncmp(com, "echo", 5) == 0)
-		return (ft_echo(arg));
-	else if (ft_strncmp(com, "exit", 5) == 0)
-		return (ft_exit(arg[1], arg));
-	else if (ft_strncmp(com, "pwd", 4) == 0)
-		return (ft_pwd());
-	else if (ft_strncmp(com, "unset", 6) == 0)
-		return (ft_unset(arg[1], env));
-	else
-		return (666);
-}
-
-t_list	*ft_create_env(char **envp)
-{
-	t_list	*env;
-	t_list	*list;
-	int		i;
-
-	i = -1;
-	env = NULL;
-	while (envp[++i] != NULL)
-	{
-		list = ft_lstnew(envp[i]);
-		ft_lstadd_back(&env, list);
-	}
-	return (env);
-}
-
-void	ft_circle_pipes_redir(int **pipes, int i)
-{
-	int	d1;
-	int	d2;
-
-	d1 = dup2(pipes[i - 1][0], 0);
-	if (d1 == -1)
-		ft_call_exit("dup error");
-	close(pipes[i - 1][0]);
-	d2 = dup2(pipes[i][1], 1);
-	if (d2 == -1)
-		ft_call_exit("dup error");
-	close(pipes[i][1]);
-}
-
 void	ft_pipe_redir(int i, int **pipes, t_lis *p_one, int out)
 {
 	int	d1;
@@ -111,35 +60,6 @@ void	ft_pipe_redir(int i, int **pipes, t_lis *p_one, int out)
 	}
 	else
 		ft_circle_pipes_redir(pipes, i);
-}
-
-void	ft_free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		i++;
-	while (--i >= 0)
-	{
-		arr[i] = NULL;
-	}
-	if (arr != NULL)
-		free(arr);
-}
-
-int	ft_error_return(pid_t pid, t_main *main_struct, int **pipes, t_list **env)
-{
-	dup2(main_struct->in, 0);
-	dup2(main_struct->out, 1);
-	while (*env)
-	{
-		free(*env);
-		(*env) = (*env)->next;
-	}
-	if (pipes)
-		ft_free_all(pipes, ft_liss_len(main_struct->p_fitst));
-	return (pid);
 }
 
 int	ft_return(int status, t_main *main_struct)
@@ -176,7 +96,6 @@ int	ft_main_job(t_main *main_struct, t_list **env, int **pipes, pid_t *pid)
 	return (0);
 }
 
-//Разбить на функции, поиграть с переменными
 int	main_exe(t_lis *p_list, t_main *main_struct)
 {
 	t_list	*env;
@@ -188,15 +107,13 @@ int	main_exe(t_lis *p_list, t_main *main_struct)
 	env = NULL;
 	pipes = NULL;
 	status = 0;
+	pid = 0;
 	main_struct->p_list = p_list;
 	main_struct->p_fitst = p_list;
 	env = ft_create_env(main_struct->my_env);
-	if (p_list->next != NULL)
-	{
-		pipes = ft_create_pipes(ft_liss_len(p_list));
-		if (!pipes)
-			return (1);
-	}
+	rez = ft_create_main_pipes(&pipes, p_list);
+	if (rez < 0)
+		return (rez);
 	rez = ft_main_job(main_struct, &env, pipes, &pid);
 	if (rez < 0)
 		return (rez);
