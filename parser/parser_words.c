@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_words.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:51:25 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 22:36:51 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 18:58:59 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,17 @@ char	*parse_word(char *param, char **env)
 	while (param[j] != '\0')
 	{
 		if (param[j] == '\"')
-			param = d_quote(param, &j, env);
+			param = d_quote(param, &j, env, 0);
 		if (param[j] == '\'')
 			param = s_quote(param, &j);
 		if (param[j] == '$')
 		{
 			param = ft_split_dollar(param, &j, env);
+			j++;
 			continue ;
 		}
 		if (param[j] == '\\')
-			param = ft_slesh(param, &j);
+			param = ft_slesh(param, &j, j);
 		if (param[j] == '\\' )
 			param = ft_drop_slesh(param, &j);
 		if (param[j])

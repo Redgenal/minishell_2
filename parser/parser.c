@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:29:59 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 19:10:33 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:27:17 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	set_blocks(int count_param, char ***blocks, char **pipes, t_main *main)
 		}
 	}
 	blocks[i] = NULL;
+	free(pipes);
 }
 
 int	ft_parser(char *str, t_main *main_struct)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 22:11:50 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 17:12:24 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ int		pre_quote(char *str, int len);
 void	pre_o_quote(char *str, int *i, int *o_flag);
 void	pre_d_quote(char *str, int *i, int *d_flag);
 int		ft_parser(char *str, t_main *main_stuct);
+void	ft_free_two_str(char *s1, char *s2);
 
 char	*s_quote(char *str, int *i);
-char	*ft_slesh(char *str, int *i);
-char	*d_quote(char *str, int *i, char **env);
+char	*ft_slesh(char *str, int *i, int j);
+char	*d_quote(char *str, int *i, char **env, int j);
 char	*ft_drop_slesh(char *str, int *i);
 int		ft_count_slesh(char *str, int i);
 char	*ft_parse_slesh(char *str, int *i);
@@ -115,6 +116,7 @@ char	**get_args(char **words, t_main *main_stuct);
 int		count_redir(char **words);
 
 int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);
+void	blocks_free(char ***blocks, int i, int j);
 
 //coms
 

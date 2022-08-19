@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:28:49 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/02 11:30:12 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/19 12:56:30 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ int	pre_start(char *str, int i, int len)
 	if (str[i] == '|')
 	{
 		if (str[i + 1] == '|' && len >= 1)
-			printf("Syntax error near unexpected token '||'\n");
+			printf("minishell: syntax error near unexpected token '||'\n");
 		else
-			printf("Syntax error near unexpected token '|'\n");
+			printf("minishell: syntax error near unexpected token '|'\n");
 		return (1);
 	}
 	if (str[i] == '<' && str[i + 1] == '<' && str[i + 1] != '\0')
 	{
 		if (str[i + 2] != '\0' && str[i + 2] == '<' && drop_space(str, 3) \
 				&& str[i + 3] != '\0' && str[i + 3] != '<')
-			printf("Syntax error near unexpected token '<<<'\n");
+			printf("minishell: syntax error near unexpected token '<<<'\n");
 		else if (str[i + 2] == '<' && str[i + 3] == '<' && str[i + 4] == '<')
-			printf("Syntax error near unexpected token '<<'\n");
+			printf("minishell: syntax error near unexpected token '<<'\n");
 		else if (str[i + 2] == '<' && str[i + 3] == '<')
-			printf("Syntax error near unexpected token '<'\n");
+			printf("minishell: syntax error near unexpected token '<'\n");
 		else if (len >= 3 && drop_space(str, 2) && str[i + 2] != '<')
 			return (0);
 		else
-			printf("Syntax error near unexpected token 'newline'\n");
+			printf("minishell: syntax error near unexpected token 'newline'\n");
 		return (1);
 	}
 	return (0);
@@ -93,7 +93,7 @@ int	pre_quote(char *str, int len)
 	}
 	if (d_flag > 0 || o_flag > 0)
 	{
-		printf ("Multi-line comment processing missing\n");
+		printf ("minishell: multi-line comment processing missing\n");
 		return (1);
 	}
 	return (0);
@@ -104,7 +104,7 @@ int	ft_prepars(char *str)
 	int	res;
 	int	len;
 
-	len = strlen(str);
+	len = ft_strlen(str);
 	res = pre_quote(str, len);
 	return (res);
 }

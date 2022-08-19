@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:56:26 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/03 15:22:26 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:13:11 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,8 @@ char	*check_special_val(char *str, int *i, char **env)
 	return (str);
 }
 
-char	*d_quote(char *str, int *i, char **env)
+char	*d_quote(char *str, int *i, char **env, int j)
 {
-	int		j;
 	char	*tmp;
 	char	*tmp1;
 	char	*tmp2;
@@ -114,14 +113,14 @@ char	*d_quote(char *str, int *i, char **env)
 	}
 	tmp = ft_substr(str, 0, j);
 	tmp1 = ft_substr(str, j + 1, *i - j - 1);
-	tmp2 = ft_strdup (str + *i + 1);
-	tmp1 = ft_strjoin(tmp, tmp1);
-	tmp2 = ft_strjoin(tmp1, tmp2);
-	free(tmp);
-	free(tmp1);
+	tmp2 = ft_strjoin(tmp, tmp1);
+	ft_free_two_str(tmp, tmp1);
+	tmp = ft_strdup (str + *i + 1);
+	tmp1 = ft_strjoin(tmp2, tmp);
+	ft_free_two_str(tmp, tmp2);
 	free(str);
 	(*i)--;
-	if (tmp2[*i] == '\"')
+	if (tmp1[*i] == '\"')
 		(*i)--;
-	return (tmp2);
+	return (tmp1);
 }

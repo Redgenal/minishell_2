@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "pipex_bonus.h": "c"
+        "pipex_bonus.h": "c",
+        "algorithm": "c",
+        "random": "c"
     }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   com_parse_api.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/18 20:33:23 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:27:09 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	count_str_for_blocks(char **block)
 
 	i = 0;
 	while (block[i])
-	i++;
+		i++;
 	return (i);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:11:45 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 20:15:26 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 17:40:35 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	sig_int(int sig)
 int	minishell(t_main *main_struct)
 {
 	char	*str;
-	int		pre;
 
 	str = NULL;
 	while (1)
 	{
 		sig_main();
-		pre = 0;
 		str = readline(PROMPT);
 		if (str && str[0] != '\0')
 			add_history(str);
@@ -39,14 +37,13 @@ int	minishell(t_main *main_struct)
 			printf("\033[A%sexit\n", PROMPT);
 			return (0);
 		}
-		pre = ft_prepars(str);
-		if (!pre)
+		if (!ft_prepars(str))
 			main_struct->status = ft_parser(str, main_struct);
 		else
 			main_struct->status = 258;
 		free (str);
 	}
-	free (str);
+	free(main_struct);
 	return (0);
 }
 

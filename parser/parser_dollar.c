@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:59:21 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/18 22:37:07 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:25:39 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*ft_get_dollar_end(int *flag, char *env_k, char *tmp, int z)
 	if (!tmp1)
 	{
 		*flag = 0;
-		free(tmp1);
 		return (tmp);
 	}
 	free(tmp);
