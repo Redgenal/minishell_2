@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 21:09:13 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/19 22:13:23 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ char	**get_args(char **words, t_main *main_stuct);
 int		count_redir(char **words);
 
 int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);
-void	blocks_free(char ***blocks, int i, int j);int		minishell(t_main *main_stuct);
+int		minishell(t_main *main_stuct);
 void	sig_int(int sig);
+void	blocks_free(char ***blocks, int i, int j);
 int		ft_prepars(char *str);
 int		pre_end_slesh(char *str, int len);
 int		drop_space(char *str, int i);
@@ -170,7 +171,8 @@ char	**get_args(char **words, t_main *main_stuct);
 int		count_redir(char **words);
 
 int		com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct);
-void	blocks_free(char ***blocks, int i, int j);int		minishell(t_main *main_stuct);
+void	blocks_free(char ***blocks, int i, int j);
+int		minishell(t_main *main_stuct);
 void	sig_int(int sig);
 int		ft_prepars(char *str);
 int		pre_end_slesh(char *str, int len);
