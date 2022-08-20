@@ -97,12 +97,26 @@ void	ft_circle_func(t_list **env, char **str, t_list *first)
 int	ft_export(t_list **env, char **str)
 {
 	t_list	*first;
+	int		i;
 
 	first = *env;
 	if (str[1] == NULL)
 		ft_no_arg(*env);
 	else
+	{
+		i = 0;
+		while (str[++i])
+		{
+			if (ft_isdigit(str[i][0]))
+			{
+				ft_putstr_fd("minishell$ export: ", 2);
+				ft_putstr_fd(str[i], 2);
+				ft_putstr_fd(": not a valid identifier\n", 2);
+				return (-1);
+			}
+		}
 		ft_circle_func(env, str, first);
+	}
 	*env = first;
 	return (0);
 }

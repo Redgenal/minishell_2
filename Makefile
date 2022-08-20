@@ -16,7 +16,7 @@ NAME 	= minishell
 
 LIB		= libft/libft.a
 
-FLAGS 	=    -I $(HEADER)
+FLAGS 	=  -Werror -Wextra -Wall  -I $(HEADER)
 
 .PHONY	: all clean fclean re
 
@@ -25,7 +25,7 @@ all	: $(NAME)
 $(NAME)	: $(HEADER)/*.h $(OBJECTS)
 	make -C libft
 	make -C libft bonus
-	$(CC) $(FLAGS) $(OBJECTS) $(LIB) -lreadline -L/Users/gantedil/.brew/opt/readline/lib -I/Users/gantedil/.brew/opt/readline/include -o $(NAME) 
+	$(CC) $(FLAGS) $(OBJECTS) $(LIB) -lreadline  -o $(NAME) 
 
 %.o	: %.c $(HEADER)/*.h
 	$(CC) $(FLAGS) -c $< -o $@

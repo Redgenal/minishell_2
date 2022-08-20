@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:59:21 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 19:25:39 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:29:18 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ char	*ft_get_env_name(char *str, int *i)
 		if (!if_key(str[*i]))
 			break ;
 	if (*i == j + 1)
+	{
+		str = ft_strdup(str);
 		return (str);
+	}	
 	tmp = ft_substr(str, j + 1, *i - j - 1);
 	return (tmp);
 }
@@ -83,24 +86,24 @@ char	*ft_get_dollar(char *str, int *i, char **env, int *flag)
 	return (ft_get_dollar_end(flag, env[k], tmp, z));
 }
 
-char	*ft_dollar(char *str, int *i, char **env)
+char	*ft_dollar(char *str, int *i, char **env, int j)
 {
-	int		j;
 	int		flag;
 	char	*tmp;
 	char	*tmp1;
 	char	*tmp2;
+	char	*tmp3;
 
 	j = *i;
 	flag = 0;
+	if (ft_strncmp(str, "\"$?\"", ft_strlen(str)) == 0)
+		return (str);
 	tmp = ft_substr(str, 0, j);
 	tmp1 = ft_get_dollar(str, &j, env, &flag);
-	tmp2 = ft_strdup(str + *i + ft_strlen(ft_get_env_name(str, i)) + 1);
-	if (flag == 1)
-		tmp = ft_strjoin(tmp, tmp1);
-	tmp = ft_strjoin(tmp, tmp2);
-	free (tmp1);
-	free (tmp2);
-	free (str);
-	return (tmp);
+	j = *i;
+	tmp3 = (ft_get_env_name(str, i));
+	tmp2 = ft_strdup(str + *i + ft_strlen(tmp3) + 1);
+	free (tmp3);
+	free(str);
+	return (ft_dollar_two(flag, tmp, tmp1, tmp2));
 }

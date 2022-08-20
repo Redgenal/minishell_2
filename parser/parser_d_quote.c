@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:56:26 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 17:13:11 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:11:49 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*check_special_val(char *str, int *i, char **env)
 	if (str[*i] == '$' )
 	{
 		len = ft_strlen(str);
-		str = ft_dollar(str, i, env);
+		str = ft_dollar(str, i, env, 0);
 		*i += ft_strlen(str) - len;
 	}
 	return (str);

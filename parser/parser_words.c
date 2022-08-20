@@ -6,7 +6,7 @@
 /*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:51:25 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 18:58:59 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:29:41 by gantedil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,28 @@ char	**get_list_str(char *str)
 	}
 	param[j] = NULL;
 	return (param);
+}
+
+char	*ft_dollar_two(int flag, char *tmp, char *tmp1, char *tmp2)
+{
+	char	*tmp3;
+
+	tmp3 = NULL;
+	if (flag == 1)
+	{
+		tmp3 = ft_strjoin(tmp, tmp1);
+		ft_free_two_str(tmp, tmp1);
+		tmp = ft_strjoin(tmp3, tmp2);
+		ft_free_two_str(tmp2, tmp3);
+		if (tmp == NULL)
+			tmp = ft_strdup("");
+		return (tmp);
+	}
+	else
+	{
+		tmp3 = ft_strjoin(tmp, tmp2);
+		free(tmp1);
+		ft_free_two_str(tmp, tmp2);
+		return (tmp3);
+	}
 }

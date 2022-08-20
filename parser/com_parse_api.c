@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/20 15:38:24 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/20 20:00:11 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ int	com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct)
 	}
 	else
 	{
+		ft_p_list_clear(lis);
 		blocks_free(blocks, count_blocks, 0);
 		return (0);
 	}
-//	blocks_free(blocks, count_blocks, 0);
-//	return (0);
 }
