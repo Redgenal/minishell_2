@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:13:28 by gantedil          #+#    #+#             */
-/*   Updated: 2022/07/27 17:49:06 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/19 18:03:15 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ char	**ft_split(char const *s, char c)
 	size_t			i;
 	size_t			str_len;
 
-	if (!s)
-		return (0);
+	if (s == NULL)
+		return (NULL);
 	strings = (char **) malloc(sizeof(char *) * (words_count(s, c) + 1));
 	if (!strings)
 		return (0);

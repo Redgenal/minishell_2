@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   signals_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 11:28:50 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 20:58:46 by utawana          ###   ########.fr       */
+/*   Created: 2022/08/17 17:52:15 by utawana           #+#    #+#             */
+/*   Updated: 2022/08/17 19:26:55 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/libft.h"
+#include "../headers/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	sig_inti(int sig)
 {
-	t_list	*p;
-	t_list	*tmp;
+	printf("^C\n");
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
+}
 
-	p = *lst;
-	if (lst)
-	{
-		if (p)
-		{
-			while (p)
-			{
-				tmp = p->next;
-				if (del)
-					del (p->content);
-				free(p);
-				p = tmp;
-			}
-			*lst = NULL;
-		}
-	}
+void	sig_intie(int sig)
+{
+	printf("^\\Quit: 3\n");
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
+}
+
+void	sig_kill(int sig)
+{
+	exit(11);
+	(void)sig;
+}
+
+void	sig_inta(int sig)
+{
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	(void)sig;
 }

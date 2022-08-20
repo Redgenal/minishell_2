@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   struct_utils_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 11:28:50 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 20:58:46 by utawana          ###   ########.fr       */
+/*   Created: 2022/08/03 19:45:49 by gantedil          #+#    #+#             */
+/*   Updated: 2022/08/04 20:22:53 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+t_redir	*get_list_redir(char **envp)
 {
-	t_list	*p;
-	t_list	*tmp;
+	t_redir	*env;
+	t_redir	*list;
+	int		i;
 
-	p = *lst;
-	if (lst)
+	i = -1;
+	env = NULL;
+	while (envp[++i] != NULL)
 	{
-		if (p)
+		if (get_redir(envp[i]) != -1)
 		{
-			while (p)
-			{
-				tmp = p->next;
-				if (del)
-					del (p->content);
-				free(p);
-				p = tmp;
-			}
-			*lst = NULL;
+			list = ft_redirnew(envp[i], envp[i + 1]);
+			ft_rediradd_back(&env, list);
 		}
 	}
+	if (env)
+	{
+		list = NULL;
+		ft_rediradd_back(&env, list);
+	}
+	return (env);
 }

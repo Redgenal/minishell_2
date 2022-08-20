@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   new_help.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 11:28:50 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/17 20:58:46 by utawana          ###   ########.fr       */
+/*   Created: 2022/08/19 20:37:57 by utawana           #+#    #+#             */
+/*   Updated: 2022/08/19 20:38:15 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/libft.h"
+#include "../headers/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_help_export(char **split, t_list **env, char *str, t_list *first)
 {
-	t_list	*p;
-	t_list	*tmp;
-
-	p = *lst;
-	if (lst)
+	if (ft_strncmp_ust(str, (*env)->content,
+			ft_strlen(split[0])) == 777)
 	{
-		if (p)
-		{
-			while (p)
-			{
-				tmp = p->next;
-				if (del)
-					del (p->content);
-				free(p);
-				p = tmp;
-			}
-			*lst = NULL;
-		}
+		*env = first;
+		ft_unset(split[0], env);
 	}
 }
