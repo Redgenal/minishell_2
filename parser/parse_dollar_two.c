@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dollar_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:26:48 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 19:25:43 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:39:34 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*ft_split_dollar_two(int j, char **tmp3, char *str, char *tmp1)
 	}
 	free(tmp3);
 	free(str);
+//	printf("!!!\n");
 	return (tmp1);
 }
 
@@ -78,10 +79,12 @@ char	*ft_split_dollar(char *str, int *i, char **env)
 	char	**tmp3;
 
 	tmp = create_some_var(str, i, env, 0);
+
+	printf("tmp = |%s|\n", tmp);
 	tmp1 = NULL;
 	tmp3 = ft_split(tmp, ' ');
 	free (tmp);
-	tmp = ft_substr(str, 0, 0);
+	tmp = ft_strdup("");
 	j = 0;
 	while (tmp3[j])
 	{
@@ -94,9 +97,20 @@ char	*ft_split_dollar(char *str, int *i, char **env)
 		j++;
 	}
 	if (tmp1 == NULL)
+	{
+		free(str);
+		while (j >= 0)
+		{
+			free(tmp3[j]);
+			j--;
+		}
+		free(tmp3);
 		return (tmp);
+	}
 	free(tmp);
 	return (ft_split_dollar_two(j, tmp3, str, tmp1));
+
+//	return(tmp);
 }
 
 void	ft_free_two_str(char *s1, char *s2)

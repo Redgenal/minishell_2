@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   com_parse_api.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gantedil <gantedil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/19 19:27:09 by gantedil         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:38:24 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,19 @@ int	com_parser_api(char ***blocks, int count_blocks, t_main *main_stuct)
 	int		rez;
 
 	lis = create_list(blocks, count_blocks, main_stuct);
-	blocks_free(blocks, count_blocks, 0);
 	if (count_blocks != 0 && ft_lis_check(lis) != 0)
 	{
 		rez = main_exe(lis, main_stuct);
 		if (rez < 0)
 			rez *= -1;
+		blocks_free(blocks, count_blocks, 0);
 		return (rez);
 	}
 	else
+	{
+		blocks_free(blocks, count_blocks, 0);
 		return (0);
+	}
+//	blocks_free(blocks, count_blocks, 0);
+//	return (0);
 }

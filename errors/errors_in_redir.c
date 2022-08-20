@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 21:05:29 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/17 19:12:18 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/20 14:49:37 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ int	ft_perm_denied(t_main *m_s, char *str)
 	ft_putstr_fd("minishell$ ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
+	m_s->status = 1;
+	return (-1);
+}
+
+int	ft_call_file_not_open(t_main *m_s, char *str)
+{
+	ft_putstr_fd("minishell$ ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	m_s->status = 1;
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:58:18 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/19 22:13:23 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/20 14:50:25 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ int		ft_unset(char *str, t_list **env);
 int		ft_exit(char *str, char **strs);
 
 int		ft_call_file_not_found(t_main *m_s, char *str);
+int		ft_call_file_not_open(t_main *m_s, char *str);
 int		ft_is_a_dire(t_main *m_s, char *str);
 int		ft_perm_denied(t_main *m_s, char *str);
 

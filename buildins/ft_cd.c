@@ -16,6 +16,12 @@ int	ft_ret_cd_code(int value, char *str)
 {
 	if (str && (value == 0))
 		ft_putstr_fd(str, 1);
+	else if (!str)
+	{
+		ft_putstr_fd("minishell$ cd", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": HOME not set\n", 2);
+	}
 	else if (str && (value == -1))
 	{
 		ft_putstr_fd("minishell$ cd: ", 2);
@@ -55,6 +61,8 @@ char	*ft_find_home(t_list *env)
 			break ;
 		(env) = (env)->next;
 	}
+	if (env == NULL)
+		return (NULL);
 	str = ft_substr((env)->content, 5, ft_strlen((env)->content) - 5);
 	if (str == NULL)
 		return (NULL);
@@ -68,9 +76,6 @@ char	*ft_change_str(char *str, t_list *env)
 	str2 = ft_find_home(env);
 	if (!str2)
 	{
-		ft_putstr_fd("minishell$ cd: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": HOME not set\n", 2);
 		return (NULL);
 	}
 	if (!str)

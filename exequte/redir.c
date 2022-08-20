@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:23:48 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/17 20:41:47 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/20 14:59:39 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,16 @@ int	ft_get_out_fd(t_main *m_s, t_lis *p_list)
 
 int	ft_dup_call(t_main *m_s, t_list **env, char **my_env)
 {
-	int	fd;
-	int	d1;
+	int		fd;
+	int		d1;
+	t_redir	*first;
 
+	first = m_s->p_list->redir;
 	while (m_s->p_list->redir != NULL)
 	{
 		if (access(m_s->p_list->redir->file, R_OK | W_OK)
-			&& m_s->p_list->redir->type == 0)
-		{
-			ft_call_file_not_found(m_s, m_s->p_list->redir->file);
-			return (1);
-		}
+			&& m_s->p_list->redir->type == 1)
+			return (ft_call_file_not_open(m_s, m_s->p_list->redir->file));
 		if (m_s->p_list->redir->type == 0 || m_s->p_list->redir->type == 4)
 			fd = ft_get_out_fd(m_s, m_s->p_list);
 		if (m_s->p_list->redir->type == 1 || m_s->p_list->redir->type == 3)
@@ -101,5 +100,6 @@ int	ft_dup_call(t_main *m_s, t_list **env, char **my_env)
 			return (d1);
 		m_s->p_list->redir = m_s->p_list->redir->next;
 	}
+	m_s->p_list->redir = first;
 	return (ft_do_ur_job(m_s, env, my_env));
 }
