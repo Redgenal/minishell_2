@@ -19,6 +19,8 @@ pid_t	ft_obrabotka(char **str, char **envp)
 	DIR		*dir;
 
 	dir = NULL;
+	if (!str[0])
+		return (0);
 	pid = fork();
 	if (pid < 0)
 		ft_call_exit("Error");

@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:28:49 by gantedil          #+#    #+#             */
-/*   Updated: 2022/08/20 19:58:33 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:03:32 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,12 @@ int	ft_prepars(char *str)
 	len = ft_strlen(str);
 	while (str[i])
 	{
-		if(str[i] == ' ')
+		if (str[i] == ' ')
 			f++;
 		i++;
 	}
-	if(len == f)
-		return(1);
+	if (len == f)
+		return (1);
 	res = pre_quote(str, len);
 	return (res);
 }

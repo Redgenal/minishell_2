@@ -6,7 +6,7 @@
 /*   By: utawana <utawana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:16:33 by utawana           #+#    #+#             */
-/*   Updated: 2022/08/20 20:00:11 by utawana          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:00:58 by utawana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	ft_lis_check(t_lis *lis)
 {
 	while (lis)
 	{
-		if (lis->args[0][0] == 0)
-			return (0);
+		if (lis->args[0])
+			if (lis->args[0][0] == 0)
+				return (0);
 		lis = lis->next;
 	}
 	return (1);
